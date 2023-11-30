@@ -1,5 +1,8 @@
 package main;
 
+import main.Fornecedor;
+
+
 public class Produto {
 
 	private String nome;
@@ -7,22 +10,21 @@ public class Produto {
 	private String codigoBarras;
 	private float custo;
 	private float precoVenda;
-	private int qtdDisponivel;
+	private int qtdDisponivel;	
+	private Fornecedor fornecedor;
 	
 	
-	
-	public Produto() {
+	public void cadastrarProduto(String nome, String descricao, String codigoBarras,
+					float custo, float precoVenda, int qtdDisponivel, 
+					Fornecedor fornecedor) {
 		
-	}
-	
-	public Produto(String nome, String descricao, String codigoBarras,
-					float custo, float precoVenda, int qtdDisponivel) {
 		this.nome = nome;
 		this.descricao = descricao;
-		this.codigoBarras = codigoBarras;
+		this.codigoBarras = codigoBarras;	
 		this.custo = custo;
 		this.precoVenda = precoVenda;
 		this.qtdDisponivel = qtdDisponivel;
+		this.fornecedor = fornecedor;
 	}
 
 	// Métodos Getters
@@ -49,6 +51,10 @@ public class Produto {
     public int getQtdDisponivel() {
         return qtdDisponivel;
     }
+    
+    public Fornecedor getFornecedor() {
+    	return fornecedor;
+    }
 
     // Métodos Setters
     public void setNome(String nome) {
@@ -74,10 +80,9 @@ public class Produto {
     public void setQtdDisponivel(int qtdDisponivel) {
         this.qtdDisponivel = qtdDisponivel;
     }
-
-	public String cadastrarProduto(Produto p, Fornecedor f) {
-		// TODO Auto-generated method stub
-		return "Produto Cadastrado!";
-	}
+    
+    public void setFornecedor(Fornecedor f) {
+    	this.fornecedor = f;
+    }
 
 }
