@@ -1,12 +1,12 @@
-package test;
+package com.sistemaestoque.app;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import main.Fornecedor;
-import main.Produto;
+import com.sistemaestoque.app.Fornecedor;
+import com.sistemaestoque.app.Produto;
 
 public class ProdutoTest {
 
@@ -14,7 +14,7 @@ public class ProdutoTest {
 	Produto prod;
 	Fornecedor forn;
 	
-	@Before
+	@BeforeEach
 	public void setup() {
 		prod = new Produto();
 		forn = new Fornecedor();

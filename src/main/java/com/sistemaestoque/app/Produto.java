@@ -1,7 +1,6 @@
-package main;
+package com.sistemaestoque.app;
 
-import main.Fornecedor;
-
+import com.sistemaestoque.app.Fornecedor;
 
 public class Produto {
 
