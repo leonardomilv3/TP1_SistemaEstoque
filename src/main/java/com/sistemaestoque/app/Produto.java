@@ -1,5 +1,7 @@
 package com.sistemaestoque.app;
 
+import java.util.List;
+
 import com.sistemaestoque.app.Fornecedor;
 
 public class Produto {
@@ -7,20 +9,35 @@ public class Produto {
 	private String nome;
 	private String descricao;
 	private String codigoBarras;
-	private float custo;
+	private float precoCusto;
 	private float precoVenda;
 	private int qtdDisponivel;	
 	private Fornecedor fornecedor;
 	
-	
 	public void cadastrarProduto(String nome, String descricao, String codigoBarras,
-					float custo, float precoVenda, int qtdDisponivel, 
-					Fornecedor fornecedor) {
+					float precoCusto, float precoVenda, int qtdDisponivel, 
+					Fornecedor fornecedor) throws DescricaoEmBrancoException, ValorInvalidoException{
 		
+		
+		if (nome == null || nome == "") {
+				throw new DescricaoEmBrancoException();
+		}
+		if (codigoBarras == null || codigoBarras == "") {
+			throw new DescricaoEmBrancoException();
+		}
+		if (precoCusto <= 0) {
+			throw new ValorInvalidoException();
+		}
+		if (precoVenda <= 0) {
+			throw new ValorInvalidoException();
+		}
+		if (qtdDisponivel <= 0) {
+			throw new ValorInvalidoException();
+		}
 		this.nome = nome;
 		this.descricao = descricao;
 		this.codigoBarras = codigoBarras;	
-		this.custo = custo;
+		this.precoCusto = precoCusto;
 		this.precoVenda = precoVenda;
 		this.qtdDisponivel = qtdDisponivel;
 		this.fornecedor = fornecedor;
@@ -39,8 +56,8 @@ public class Produto {
         return codigoBarras;
     }
 
-    public float getCusto() {
-        return custo;
+    public float getPrecoCusto() {
+        return precoCusto;
     }
 
     public float getPrecoVenda() {
@@ -68,8 +85,8 @@ public class Produto {
         this.codigoBarras = codigoBarras;
     }
 
-    public void setCusto(float custo) {
-        this.custo = custo;
+    public void setPrecoCusto(float precoCusto) {
+        this.precoCusto = precoCusto;
     }
 
     public void setPrecoVenda(float precoVenda) {
