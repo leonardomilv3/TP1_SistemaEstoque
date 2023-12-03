@@ -11,6 +11,14 @@ public class Filial {
         this.nome = nome;
     }
 
+    public void adicionaProdutos(Produto produto) {
+        this.estoque.armazenaProduto(produto);
+    }
+
+    public List<Produto> listaProdutos() {
+        return this.estoque.listaProdutosArmazenados();
+    }
+
     public String getNome() {
         return this.nome;
     }
