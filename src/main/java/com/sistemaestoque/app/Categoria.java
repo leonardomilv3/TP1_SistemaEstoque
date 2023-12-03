@@ -5,11 +5,13 @@ import com.sistemaestoque.app.exception.CategoriaEmBrancoException;
 public class Categoria {
     public String categoria;
 
-    public String getCategoria(){
-        return categoria;
+    public Categoria(String categoria) throws CategoriaEmBrancoException{
+        if(categoria == "" || categoria == null)
+            throw new CategoriaEmBrancoException();
+        this.categoria = categoria;
     }
 
-    public String setCategoria(String categoria) throws CategoriaEmBrancoException{
-        return "Categoria criada";
+    public String getCategoria(){
+        return categoria;
     }
 }
