@@ -6,7 +6,7 @@ import com.sistemaestoque.app.exception.ValorInvalidoException;
 public class Produto {
 
     private static final int LIMITE_MINIMO = 10;
-	  private String nome;
+	private String nome;
     private String descricao;
     private String codigoBarras;
     private float precoCusto;

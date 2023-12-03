@@ -1,48 +1,24 @@
 package com.sistemaestoque.app;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Estoque {
 
 	private static final int LIMITE_MINIMO = 10;
-	private Map<Produto, Integer> quantidadeProdutos;
+	private List<Produto> listaProduto;
 	private List<Observador> observadores;
 
 	public Estoque() {
-		this.quantidadeProdutos = new HashMap<>();
+		this.listaProduto = new ArrayList<Produto>();
 		this.observadores = new ArrayList<Observador>();
 	}
 
-	public void armazenaProduto(Produto produto, int quantidade) {
-		if (this.quantidadeProdutos.containsKey(produto)) {
-			int quantidadeExistente = this.quantidadeProdutos.get(produto);
-			this.quantidadeProdutos.put(produto, quantidadeExistente + quantidade);
-		} else {
-			this.quantidadeProdutos.put(produto, quantidade);
+	public void armazenaProduto(Produto p) {
+		this.listaProduto.add(p);
+		if (produtoComEstoqueBaixo(p)) {
+			String message = notificarObservadoresBaixoEstoque(p);
 		}
-	}
-
-	public Produto consultaEstoquePorNome(String nome) {
-		for (Map.Entry<Produto, Integer> entry : quantidadeProdutos.entrySet()) {
-			Produto produto = entry.getKey();
-			if (produto.getNome().equals(nome)) {
-				return produto;
-			}
-		}
-		return null;
-	}
-
-	public Produto consultaEstoquePorCodigo(String codigoBarras) {
-		for (Map.Entry<Produto, Integer> entry : quantidadeProdutos.entrySet()) {
-			Produto produto = entry.getKey();
-			if (produto.getCodigoBarras().equals(codigoBarras)) {
-				return produto;
-			}
-		}
-		return null;
 	}
 
 	private boolean produtoComEstoqueBaixo(Produto p) {
@@ -50,22 +26,40 @@ public class Estoque {
 		return p.getQtdDisponivel() <= LIMITE_MINIMO;
 	}
 
-	public Map<Produto, Integer> listaProdutosArmazenados() {
-		return this.quantidadeProdutos;
+	public List<Produto> listaProdutosArmazenados() {
+		return this.listaProduto;
 	}
 
+	public Produto consultaEstoquePorNome(String nome) {
+		for(Produto p: listaProduto) {
+		  if(p.getNome().equals(nome)) {
+			return p;
+		  }
+		}
+		return null;
+	  }
+	
+	  public Produto consultaEstoquePorCodigo(String codigoBarras) {
+		for(Produto p: listaProduto) {
+		  if(p.getCodigoBarras().equals(codigoBarras)) {
+			return p;
+		  }
+		}
+		return null;
+	  }
+	
 	public void adicionarObservador(AlertaEstoqueBaixo alertaEstoqueBaixo) {
 		observadores.add(alertaEstoqueBaixo);
 	}
-
+	
 	public String notificarObservadoresBaixoEstoque(Produto p) {
 		String mensagem = "";
-
-		for (Observador obs : observadores) {
+		
+		for(Observador obs : observadores) {
 			obs.notificarBaixoEstoque(p);
 			mensagem = "Produto: " + p.getNome() + " | Qtd disponível: " + p.getQtdDisponivel();
 		}
-
+		
 		return mensagem;
 	}
 
