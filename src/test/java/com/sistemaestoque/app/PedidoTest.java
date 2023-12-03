@@ -15,14 +15,14 @@ public class PedidoTest {
 
     @ParameterizedTest
     @MethodSource("getParameters")
-    public void testCriacaoClassePedido(int quantidade, int valorUnitario, float desconto, float expectedTotal)
+    public void testCriacaoClassePedido(int quantidade, int valorUnitario, float desconto, float totalEsperado)
             throws ValorInvalidoException, DescricaoEmBrancoException {
         Fornecedor fornecedor = new Fornecedor(1, "Natura");
         Produto produto = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor);
 
         Pedido pedido = new Pedido(produto, quantidade, valorUnitario, desconto, Pedido.Status.FINALIZADO);
 
-        assertEquals(expectedTotal, pedido.getValorTotal());
+        assertEquals(totalEsperado, pedido.getValorTotal());
     }
 
     private static Stream<Object[]> getParameters() {
