@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
+import com.sistemaestoque.app.exception.ValorInvalidoException;
+
 public class ProdutoTest {
 
 	Produto prod;

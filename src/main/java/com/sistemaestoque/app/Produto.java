@@ -1,5 +1,8 @@
 package com.sistemaestoque.app;
 
+import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
+import com.sistemaestoque.app.exception.ValorInvalidoException;
+
 public class Produto {
 
     private String nome;

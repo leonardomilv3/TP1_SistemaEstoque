@@ -1,6 +1,10 @@
 package com.sistemaestoque.app;
 
 import org.junit.jupiter.api.Test;
+
+import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
+import com.sistemaestoque.app.exception.ValorInvalidoException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Date;

@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
+import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
+import com.sistemaestoque.app.exception.ValorInvalidoException;
+
 public class FilialTest {
 
     @Test

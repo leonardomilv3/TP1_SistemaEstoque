@@ -1,4 +1,5 @@
 package com.sistemaestoque.app;
+import com.sistemaestoque.app.exception.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
