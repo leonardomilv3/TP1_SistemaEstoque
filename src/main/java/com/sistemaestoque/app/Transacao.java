@@ -8,17 +8,20 @@ public class Transacao {
     private Date data;
 
     public Transacao(String tipo, Produto produto) {
+        this.produto = produto;
+        this.tipo = tipo;
+        this.data = new Date();
     }
 
     public Produto getProduto() {
-        return new Produto();
+        return this.produto;
     }
 
     public String getTipo() {
-        return "TIPO TRANSACAO";
+        return this.tipo;
     }
 
     public Date getData() {
-        return new Date();
+        return this.data;
     }
 }
