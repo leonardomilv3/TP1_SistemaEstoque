@@ -17,7 +17,7 @@ class EstoqueTest {
 
 	@Test
 	void testArmazenaUmProdutoNoEstoque() throws DescricaoEmBrancoException, ValorInvalidoException {
-		Fornecedor forn = new Fornecedor();
+		Fornecedor forn = new Fornecedor(1, "Natura");
 		Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, forn);
 		estoque.armazenaProduto(prod1);
 		assertEquals(1, estoque.listaProdutosArmazenados().size());
