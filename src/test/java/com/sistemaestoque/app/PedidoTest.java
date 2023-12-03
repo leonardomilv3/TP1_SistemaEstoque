@@ -28,7 +28,8 @@ public class PedidoTest {
     private static Stream<Object[]> getParameters() {
         return Stream.of(
                 new Object[] { 4, 500, 50.0f, 1000.0f },
-                new Object[] { 2, 750, 25.0f, 1125.0f });
+                new Object[] { 2, 750, 25.0f, 1125.0f },
+                new Object[] { 1, 750, 0f, 750.0f });
     }
 
     @Test
