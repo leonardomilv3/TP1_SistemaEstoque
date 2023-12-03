@@ -1,5 +1,6 @@
 package com.sistemaestoque.app;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -30,4 +31,13 @@ public class PedidoTest {
                 new Object[] { 2, 750, 25.0f, 1125.0f });
     }
 
+    @Test
+    void testCadastrarPedidoInvalido() throws ValorInvalidoException {
+        assertThrowsExactly(ValorInvalidoException.class, () -> {
+            Fornecedor fornecedor = new Fornecedor(1, "Natura");
+            Produto produto = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor);
+
+            new Pedido(produto, -1, -1, -1, Pedido.Status.FINALIZADO);
+        });
+    }
 }
