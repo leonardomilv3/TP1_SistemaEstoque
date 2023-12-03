@@ -21,12 +21,19 @@ public class FilialTest {
     @Test
     public void testAdicionaProdutoFilial() throws DescricaoEmBrancoException, ValorInvalidoException {
         Filial filial = new Filial("FILIAL 1");
-        Fornecedor forn = new Fornecedor();
-        Fornecedor fornecedor = new Fornecedor(1, "Natura");;
+        Fornecedor fornecedor = new Fornecedor();
         Produto produto = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor);
         filial.adicionaProdutos(produto);
 
         assertEquals(1, filial.listaProdutos().size());
         assertEquals(produto, filial.listaProdutos().get(0));
+    }
+
+    @Test
+    public void testVendeProduto() throws DescricaoEmBrancoException, ValorInvalidoException {
+        Filial filial = new Filial("FILIAL 1");
+        Produto produtoVendido = filial.vendeProduto("1234");
+
+        assertEquals("1234", produtoVendido.getCodigoBarras());
     }
 }
