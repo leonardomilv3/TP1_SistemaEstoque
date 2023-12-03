@@ -35,14 +35,7 @@ public class Pedido {
         this.valorUnitario = valorUnitario;
         this.desconto = desconto;
         this.status = status;
-    }
-
-    public float getValorTotal() {
-        return 1000;
-    }
-
-    public void setValorTotal(float valorTotal) {
-        this.valorTotal = valorTotal;
+        this.valorTotal = calcularValorTotal();
     }
 
     public Status getStatus() {
@@ -75,6 +68,15 @@ public class Pedido {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+        this.valorTotal = calcularValorTotal();
+    }
+
+    public float getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(float valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     public float getValorUnitario() {
@@ -83,6 +85,7 @@ public class Pedido {
 
     public void setValorUnitario(float valorUnitario) {
         this.valorUnitario = valorUnitario;
+        this.valorTotal = calcularValorTotal();
     }
 
     public float getDesconto() {
@@ -91,5 +94,10 @@ public class Pedido {
 
     public void setDesconto(float desconto) {
         this.desconto = desconto;
+        this.valorTotal = calcularValorTotal();
+    }
+
+    private float calcularValorTotal() {
+        return quantidade * valorUnitario * (1 - desconto / 100);
     }
 }
