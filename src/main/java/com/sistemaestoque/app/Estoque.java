@@ -21,6 +21,24 @@ public class Estoque {
 		}
 	}
 
+  public Produto consultaEstoquePorNome(String nome) {
+    for(Produto p: listaProduto) {
+      if(p.getNome().equals(nome)) {
+        return p;
+      }
+    }
+    return null;
+  }
+
+  public Produto consultaEstoquePorCodigo(String codigoBarras) {
+    for(Produto p: listaProduto) {
+      if(p.getCodigoBarras().equals(codigoBarras)) {
+        return p;
+      }
+    }
+    return null;
+  }
+
 	private boolean produtoComEstoqueBaixo(Produto p) {
 		// TODO Auto-generated method stub
 		return p.getQtdDisponivel() <= LIMITE_MINIMO;

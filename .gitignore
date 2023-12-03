@@ -25,3 +25,5 @@ replay_pid*
 
 # ignore vim swap files
 *.swp
+
+/tags
