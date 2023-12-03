@@ -46,4 +46,24 @@ class EstoqueTest {
 		assertEquals("Produto: Caixa Ovos | Qtd disponível: 3", estoque.notificarObservadoresBaixoEstoque(prod2));
 	}
 
+	@Test
+	void testConsultaProdutoPorNome() throws DescricaoEmBrancoException, ValorInvalidoException {
+		Fornecedor forn = new Fornecedor(1, "Natura");
+		Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn);
+		estoque.armazenaProduto(prod1, 10);
+
+		assertNotNull(estoque.consultaEstoquePorNome("Sabonete"));
+		assertNull(estoque.consultaEstoquePorNome("Agua"));
+	}
+
+	@Test
+	void testConsultaProdutoPorCodigo() throws DescricaoEmBrancoException, ValorInvalidoException {
+		Fornecedor forn = new Fornecedor(1, "Natura");
+		Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn);
+		estoque.armazenaProduto(prod1, 10);
+
+		assertNotNull(estoque.consultaEstoquePorCodigo("0000"));
+		assertNull(estoque.consultaEstoquePorCodigo("1234"));
+	}
+
 }

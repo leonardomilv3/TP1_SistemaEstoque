@@ -25,6 +25,26 @@ public class Estoque {
 		}
 	}
 
+	public Produto consultaEstoquePorNome(String nome) {
+		for (Map.Entry<Produto, Integer> entry : quantidadeProdutos.entrySet()) {
+			Produto produto = entry.getKey();
+			if (produto.getNome().equals(nome)) {
+				return produto;
+			}
+		}
+		return null;
+	}
+
+	public Produto consultaEstoquePorCodigo(String codigoBarras) {
+		for (Map.Entry<Produto, Integer> entry : quantidadeProdutos.entrySet()) {
+			Produto produto = entry.getKey();
+			if (produto.getCodigoBarras().equals(codigoBarras)) {
+				return produto;
+			}
+		}
+		return null;
+	}
+
 	private boolean produtoComEstoqueBaixo(Produto p) {
 		// TODO Auto-generated method stub
 		return p.getQtdDisponivel() <= LIMITE_MINIMO;
