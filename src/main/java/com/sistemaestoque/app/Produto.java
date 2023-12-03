@@ -18,19 +18,19 @@ public class Produto {
             Fornecedor fornecedor) throws DescricaoEmBrancoException, ValorInvalidoException {
 
         if (nome == null || nome == "") {
-            throw new DescricaoEmBrancoException();
+            throw new DescricaoEmBrancoException("Nome inválido");
         }
         if (codigoBarras == null || codigoBarras == "") {
-            throw new DescricaoEmBrancoException();
+            throw new DescricaoEmBrancoException("Código de Barras inválido");
         }
         if (precoCusto <= 0) {
-            throw new ValorInvalidoException();
+            throw new ValorInvalidoException("Preço de Custo inválido");
         }
         if (precoVenda <= 0) {
-            throw new ValorInvalidoException();
+            throw new ValorInvalidoException("Preço de Venda inválido");
         }
         if (qtdDisponivel <= 0) {
-            throw new ValorInvalidoException();
+            throw new ValorInvalidoException("Quantidade inválida");
         }
         this.nome = nome;
         this.descricao = descricao;

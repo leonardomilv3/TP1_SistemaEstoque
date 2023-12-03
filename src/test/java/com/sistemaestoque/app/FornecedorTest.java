@@ -28,5 +28,13 @@ class FornecedorTest {
 		Fornecedor forn2 = new Fornecedor(2, "Samsung");
 		assertEquals(2, Fornecedor.qtdFornecedor());
 	}
+	
+	@Test
+	void testCadastraTresFornecedores() {
+		Fornecedor forn1 = new Fornecedor(1, "Natura");
+		Fornecedor forn2 = new Fornecedor(2, "Samsung");
+		Fornecedor forn3 = new Fornecedor(3, "Friboi");
+		assertEquals(3, Fornecedor.qtdFornecedor());
+	}
 
 }

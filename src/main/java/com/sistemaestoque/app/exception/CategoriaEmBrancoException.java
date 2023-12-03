@@ -1,11 +1,13 @@
 package com.sistemaestoque.app.exception;
 
 public class CategoriaEmBrancoException extends Exception{
-    public CategoriaEmBrancoException() {
+    
+	public CategoriaEmBrancoException() {
         super();
     }
 
     public CategoriaEmBrancoException(String message) {
         super(message);
     }
+    
 }
