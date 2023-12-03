@@ -2,14 +2,13 @@ package com.sistemaestoque.app;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-
 import com.sistemaestoque.app.exception.ValorInvalidoException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class FornecedoresTest {
 
-	Fornecedores fornecedoresDb;
+  Fornecedores fornecedoresDb;
 
   @BeforeEach
   public void setup() {
@@ -21,4 +20,3 @@ public class FornecedoresTest {
     assertEquals(true, fornecedoresDb.listarFornecedores().isEmpty());
   }
 }
-

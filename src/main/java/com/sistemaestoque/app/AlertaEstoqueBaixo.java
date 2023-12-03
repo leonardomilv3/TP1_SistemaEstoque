@@ -1,10 +1,7 @@
 package com.sistemaestoque.app;
 
-public class AlertaEstoqueBaixo implements Observador{
-	
-	@Override
-	public void notificarBaixoEstoque(Produto produto) {
-		
-	}
-	
+public class AlertaEstoqueBaixo implements Observador {
+
+  @Override
+  public void notificarBaixoEstoque(Produto produto) {}
 }
