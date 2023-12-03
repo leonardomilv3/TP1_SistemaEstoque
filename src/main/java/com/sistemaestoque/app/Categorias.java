@@ -19,5 +19,12 @@ public class Categorias {
         categorias.add(novaCategoria);
         return "Categoria adicionada";
     }
+
+    public void listaTudo() {
+        int index = 0;
+        for (Categoria categoria : categorias) {
+            System.out.println(++index + " - " + categoria.getCategoria());
+        }
+    }
     
 }
