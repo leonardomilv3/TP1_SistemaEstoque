@@ -13,7 +13,7 @@ public class ProdutoTest {
 
 	@BeforeEach
 	public void setup() throws DescricaoEmBrancoException, ValorInvalidoException {
-		forn = new Fornecedor();
+		forn = new Fornecedor(1, "Natura");
 		prod = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, forn);
 	}
 
