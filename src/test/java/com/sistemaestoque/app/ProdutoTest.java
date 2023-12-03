@@ -12,15 +12,13 @@ public class ProdutoTest {
 	Fornecedor forn;
 
 	@BeforeEach
-	public void setup() {
-		prod = new Produto();
+	public void setup() throws DescricaoEmBrancoException, ValorInvalidoException {
 		forn = new Fornecedor();
+		prod = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, forn);
 	}
 
 	@Test
 	void testCadastrarUmProduto() throws DescricaoEmBrancoException, ValorInvalidoException {
-		prod.cadastrarProduto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, forn);
-
 		assertEquals("Sabonete", prod.getNome());
 		assertEquals("Produto de limpeza", prod.getDescricao());
 		assertEquals("0000", prod.getCodigoBarras());
@@ -33,13 +31,13 @@ public class ProdutoTest {
 	@Test
 	public void testCadastrarUmProdutoDescricaoEmBranco() throws DescricaoEmBrancoException, ValorInvalidoException {
 		Assertions.assertThrows(DescricaoEmBrancoException.class,
-				() -> prod.cadastrarProduto(null, null, null, 1f, 1f, 1, forn));
+				() -> prod = new Produto(null, null, null, 1f, 1f, 1, forn));
 	}
 
 	@Test
 	public void testCadastrarUmProdutoValorInvalido() throws DescricaoEmBrancoException, ValorInvalidoException {
 		Assertions.assertThrows(ValorInvalidoException.class,
-				() -> prod.cadastrarProduto("a", "b", "c", -1f, 1f, 1, forn));
+				() -> prod = new Produto("a", "b", "c", -1f, 1f, 1, forn));
 	}
 
 }

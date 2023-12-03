@@ -10,7 +10,7 @@ public class Produto {
     private int qtdDisponivel;
     private Fornecedor fornecedor;
 
-    public void cadastrarProduto(String nome, String descricao, String codigoBarras,
+    public Produto(String nome, String descricao, String codigoBarras,
             float precoCusto, float precoVenda, int qtdDisponivel,
             Fornecedor fornecedor) throws DescricaoEmBrancoException, ValorInvalidoException {
 
