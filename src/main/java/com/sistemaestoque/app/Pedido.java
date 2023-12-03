@@ -8,7 +8,6 @@ public class Pedido {
         FINALIZADO
     }
 
-    private Fornecedor fornecedor;
     private Produto produto;
     private int quantidade;
     private float valorTotal;
@@ -16,7 +15,7 @@ public class Pedido {
     private float desconto;
     private Status status;
 
-    public Pedido(Fornecedor fornecedor, Produto produto, int quantidade, float valorUnitario, float desconto,
+    public Pedido(Produto produto, int quantidade, float valorUnitario, float desconto,
             Status status) throws ValorInvalidoException {
 
         if (quantidade <= 0) {
@@ -29,7 +28,6 @@ public class Pedido {
             throw new ValorInvalidoException();
         }
 
-        this.fornecedor = fornecedor;
         this.produto = produto;
         this.quantidade = quantidade;
         this.valorUnitario = valorUnitario;
@@ -44,14 +42,6 @@ public class Pedido {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public Fornecedor getFornecedor() {
-        return fornecedor;
-    }
-
-    public void setFornecedor(Fornecedor fornecedor) {
-        this.fornecedor = fornecedor;
     }
 
     public Produto getProduto() {
