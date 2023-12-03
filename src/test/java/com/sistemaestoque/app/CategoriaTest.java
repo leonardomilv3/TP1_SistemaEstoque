@@ -5,18 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import org.junit.jupiter.api.Test;
 
-import com.sistemaestoque.app.exception.CategoriaEmBrancoException;
+import com.sistemaestoque.app.exception.ValorInvalidoException;
 
 public class CategoriaTest {
 
     @Test
-    void testCadastrarCategoria() throws CategoriaEmBrancoException {
+    void testCadastrarCategoria() throws ValorInvalidoException {
         Categoria categoria = new Categoria("Saúde");
         assertEquals("Saúde", categoria.getCategoria());
     }
     
     @Test
-    void testCadastrarDuasCategorias() throws CategoriaEmBrancoException {
+    void testCadastrarDuasCategorias() throws ValorInvalidoException {
         Categoria categoria1 = new Categoria("Frios");
         Categoria categoria2 = new Categoria("Padaria");
 
@@ -25,8 +25,8 @@ public class CategoriaTest {
     }
 
     @Test
-    void testCadastrarCategoriaInvalida() throws CategoriaEmBrancoException {
-        assertThrowsExactly(CategoriaEmBrancoException.class, () -> {
+    void testCadastrarCategoriaInvalida() throws ValorInvalidoException {
+        assertThrowsExactly(ValorInvalidoException.class, () -> {
             new Categoria("");
         });
     }
