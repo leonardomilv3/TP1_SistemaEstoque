@@ -16,9 +16,17 @@ class FornecedorTest {
 
 	@Test
 	void testCadastraUmFornecedor() {
-		this.fornecedor = new Fornecedor(1, "Natura");
-		assertEquals(1, fornecedor.getId());
-		assertEquals("Natura", fornecedor.getNomeFantasia());
+		Fornecedor forn1 = new Fornecedor(1, "Natura");
+		assertEquals(1, forn1.getId());
+		assertEquals("Natura", forn1.getNomeFantasia());
+		assertEquals(1, Fornecedor.qtdFornecedor());
+	}
+	
+	@Test
+	void testCadastraDoisFornecedores() {
+		Fornecedor forn1 = new Fornecedor(1, "Natura");
+		Fornecedor forn2 = new Fornecedor(2, "Samsung");
+		assertEquals(2, Fornecedor.qtdFornecedor());
 	}
 
 }

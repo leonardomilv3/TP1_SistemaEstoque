@@ -12,10 +12,11 @@ import com.sistemaestoque.app.exception.ValorInvalidoException;
 public class ProdutoTest {
 
 	Produto prod;
-	Fornecedor forn;
+	Fornecedor fornecedor, forn;
 
 	@BeforeEach
 	public void setup() throws DescricaoEmBrancoException, ValorInvalidoException {
+		fornecedor = new Fornecedor();
 		forn = new Fornecedor(1, "Natura");
 		prod = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, forn);
 	}
