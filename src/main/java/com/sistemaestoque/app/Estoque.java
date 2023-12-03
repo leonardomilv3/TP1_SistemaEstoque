@@ -5,12 +5,17 @@ import java.util.List;
 
 public class Estoque {
 
-	public static List<Produto> listaProduto;
-		
+	private List<Produto> listaProduto;
+
+	public Estoque() {
+		this.listaProduto = new ArrayList<Produto>();
+	}
+
 	public void armazenaProduto(Produto p) {
-		if (listaProduto == null) {
-			listaProduto = new ArrayList<Produto>();
-		}	
-		listaProduto.add(p);
+		this.listaProduto.add(p);
+	}
+
+	public List<Produto> listaProdutosArmazenados() {
+		return this.listaProduto;
 	}
 }
