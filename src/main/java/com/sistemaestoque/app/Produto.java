@@ -3,7 +3,7 @@ package com.sistemaestoque.app;
 import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
 import com.sistemaestoque.app.exception.ValorInvalidoException;
 
-public class Produto implements Observador {
+public class Produto {
 
     private static final int LIMITE_MINIMO = 10;
 	private String nome;
@@ -98,13 +98,5 @@ public class Produto implements Observador {
     public void setFornecedor(Fornecedor f) {
         this.fornecedor = f;
     }
-
-	@Override
-	public void notificarBaixoEstoque(Produto produto) {
-		// TODO Auto-generated method stub
-		if (produto.getQtdDisponivel() < LIMITE_MINIMO) {
-			  System.out.println("ALERTA: Baixo Estoque para o produto " + produto.getNome());
-		}
-	}
 
 }

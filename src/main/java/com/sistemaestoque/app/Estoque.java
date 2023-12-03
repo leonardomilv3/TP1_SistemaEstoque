@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Estoque {
 
+	private static final int LIMITE_MINIMO = 10;
 	private List<Produto> listaProduto;
 	private List<Observador> observadores;
 
@@ -15,21 +16,33 @@ public class Estoque {
 
 	public void armazenaProduto(Produto p) {
 		this.listaProduto.add(p);
+		if (produtoComEstoqueBaixo(p)) {
+			String message = notificarObservadoresBaixoEstoque(p);
+		}
 	}
 
-	public String notificarObservadoresBaixoEstoque(Produto p) {
-		String mensagem = "";
-		
-		mensagem =  "Produto: Sabonete | Qtd disponível: 1";
-		
-		return mensagem;
+	private boolean produtoComEstoqueBaixo(Produto p) {
+		// TODO Auto-generated method stub
+		return p.getQtdDisponivel() <= LIMITE_MINIMO;
 	}
 
 	public List<Produto> listaProdutosArmazenados() {
 		return this.listaProduto;
 	}
-
+	
 	public void adicionarObservador(AlertaEstoqueBaixo alertaEstoqueBaixo) {
 		observadores.add(alertaEstoqueBaixo);
 	}
+	
+	public String notificarObservadoresBaixoEstoque(Produto p) {
+		String mensagem = "";
+		
+		for(Observador obs : observadores) {
+			obs.notificarBaixoEstoque(p);
+			mensagem = "Produto: " + p.getNome() + " | Qtd disponível: " + p.getQtdDisponivel();
+		}
+		
+		return mensagem;
+	}
+
 }
