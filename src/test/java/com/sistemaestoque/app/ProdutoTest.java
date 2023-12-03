@@ -22,7 +22,7 @@ public class ProdutoTest {
 	}
 
 	@Test
-	void testCadastrarUmProduto() throws DescricaoEmBrancoException, ValorInvalidoException {
+	public void testCadastrarUmProduto() throws DescricaoEmBrancoException, ValorInvalidoException {
 		assertEquals("Sabonete", prod.getNome());
 		assertEquals("Produto de limpeza", prod.getDescricao());
 		assertEquals("0000", prod.getCodigoBarras());
