@@ -1,31 +1,33 @@
 package com.sistemaestoque.app;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
 import com.sistemaestoque.app.exception.ValorInvalidoException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.stream.Stream;
+
 public class PedidoTest {
 
-    @Test
-    public void testCriacaoClassePedidoUm() throws ValorInvalidoException, DescricaoEmBrancoException {
+    @ParameterizedTest
+    @MethodSource("getParameters")
+    public void testCriacaoClassePedido(int quantidade, int valorUnitario, float desconto, float expectedTotal)
+            throws ValorInvalidoException, DescricaoEmBrancoException {
         Fornecedor fornecedor = new Fornecedor(1, "Natura");
         Produto produto = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor);
 
-        Pedido pedido = new Pedido(produto, 4, 500, 50.0f, Pedido.Status.FINALIZADO);
+        Pedido pedido = new Pedido(produto, quantidade, valorUnitario, desconto, Pedido.Status.FINALIZADO);
 
-        assertEquals(1000, pedido.getValorTotal());
+        assertEquals(expectedTotal, pedido.getValorTotal());
     }
 
-    @Test
-    public void testCriacaoClassePedidoDois() throws ValorInvalidoException, DescricaoEmBrancoException {
-        Fornecedor fornecedor = new Fornecedor(1, "Natura");
-        Produto produto = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor);
-
-        Pedido pedido = new Pedido(produto, 2, 750, 25.0f, Pedido.Status.FINALIZADO);
-
-        assertEquals(1125.0f, pedido.getValorTotal());
+    private static Stream<Object[]> getParameters() {
+        return Stream.of(
+                new Object[] { 4, 500, 50.0f, 1000.0f },
+                new Object[] { 2, 750, 25.0f, 1125.0f });
     }
+
 }
