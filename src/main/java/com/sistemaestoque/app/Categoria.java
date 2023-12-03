@@ -7,7 +7,7 @@ public class Categoria {
 
     public Categoria(String categoria) throws CategoriaEmBrancoException{
         if(categoria == "" || categoria == null)
-            throw new CategoriaEmBrancoException();
+            throw new CategoriaEmBrancoException("Categoria inválida");
         this.categoria = categoria;
     }
 

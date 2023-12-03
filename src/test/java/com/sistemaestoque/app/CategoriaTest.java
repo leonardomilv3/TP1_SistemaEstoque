@@ -1,12 +1,14 @@
 package com.sistemaestoque.app;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import org.junit.jupiter.api.Test;
 
 import com.sistemaestoque.app.exception.CategoriaEmBrancoException;
 
 public class CategoriaTest {
+
     @Test
     void testCadastrarCategoria() throws CategoriaEmBrancoException {
         Categoria categoria = new Categoria("Saúde");
@@ -20,5 +22,12 @@ public class CategoriaTest {
 
         assertEquals("Frios", categoria1.getCategoria());
         assertEquals("Padaria", categoria2.getCategoria());
+    }
+
+    @Test
+    void testCadastrarCategoriaInvalida() throws CategoriaEmBrancoException {
+        assertThrowsExactly(CategoriaEmBrancoException.class, () -> {
+            new Categoria("");
+        });
     }
 }
