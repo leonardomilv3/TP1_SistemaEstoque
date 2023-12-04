@@ -6,108 +6,114 @@ import java.util.Date;
 
 public class Produto {
 
-    private static final int LIMITE_MINIMO = 10;
-    private String nome;
-    private String descricao;
-    private String codigoBarras;
-    private float precoCusto;
-    private float precoVenda;
-    private int qtdDisponivel;
-    private Fornecedor fornecedor;
-    private Date dataValidade;
+  private static final int LIMITE_MINIMO = 10;
+  private String nome;
+  private String descricao;
+  private String codigoBarras;
+  private float precoCusto;
+  private float precoVenda;
+  private int qtdDisponivel;
+  private Fornecedor fornecedor;
+  private Date dataValidade;
 
-    public Produto(String nome, String descricao, String codigoBarras,
-            float precoCusto, float precoVenda, int qtdDisponivel,
-            Fornecedor fornecedor, Date dataValidade) throws DescricaoEmBrancoException, ValorInvalidoException {
+  public Produto(
+      String nome,
+      String descricao,
+      String codigoBarras,
+      float precoCusto,
+      float precoVenda,
+      int qtdDisponivel,
+      Fornecedor fornecedor,
+      Date dataValidade)
+      throws DescricaoEmBrancoException, ValorInvalidoException {
 
-        if (nome == null || nome == "") {
-            throw new DescricaoEmBrancoException("Nome inválido");
-        }
-        if (codigoBarras == null || codigoBarras == "") {
-            throw new DescricaoEmBrancoException("Código de Barras inválido");
-        }
-        if (precoCusto <= 0) {
-            throw new ValorInvalidoException("Preço de Custo inválido");
-        }
-        if (precoVenda <= 0) {
-            throw new ValorInvalidoException("Preço de Venda inválido");
-        }
-        if (qtdDisponivel <= 0) {
-            throw new ValorInvalidoException("Quantidade inválida");
-        }
-        this.nome = nome;
-        this.descricao = descricao;
-        this.codigoBarras = codigoBarras;
-        this.precoCusto = precoCusto;
-        this.precoVenda = precoVenda;
-        this.qtdDisponivel = qtdDisponivel;
-        this.fornecedor = fornecedor;
-        this.dataValidade = dataValidade;
+    if (nome == null || nome == "") {
+      throw new DescricaoEmBrancoException("Nome inválido");
     }
-
-    public Date getDataValidade() {
-        return dataValidade;
+    if (codigoBarras == null || codigoBarras == "") {
+      throw new DescricaoEmBrancoException("Código de Barras inválido");
     }
-
-    public void setDataValidade(Date dataValidade) {
-        this.dataValidade = dataValidade;
+    if (precoCusto <= 0) {
+      throw new ValorInvalidoException("Preço de Custo inválido");
     }
-
-    public String getNome() {
-        return nome;
+    if (precoVenda <= 0) {
+      throw new ValorInvalidoException("Preço de Venda inválido");
     }
-
-    public String getDescricao() {
-        return descricao;
+    if (qtdDisponivel <= 0) {
+      throw new ValorInvalidoException("Quantidade inválida");
     }
+    this.nome = nome;
+    this.descricao = descricao;
+    this.codigoBarras = codigoBarras;
+    this.precoCusto = precoCusto;
+    this.precoVenda = precoVenda;
+    this.qtdDisponivel = qtdDisponivel;
+    this.fornecedor = fornecedor;
+    this.dataValidade = dataValidade;
+  }
 
-    public String getCodigoBarras() {
-        return codigoBarras;
-    }
+  public Date getDataValidade() {
+    return dataValidade;
+  }
 
-    public float getPrecoCusto() {
-        return precoCusto;
-    }
+  public void setDataValidade(Date dataValidade) {
+    this.dataValidade = dataValidade;
+  }
 
-    public float getPrecoVenda() {
-        return precoVenda;
-    }
+  public String getNome() {
+    return nome;
+  }
 
-    public int getQtdDisponivel() {
-        return qtdDisponivel;
-    }
+  public String getDescricao() {
+    return descricao;
+  }
 
-    public Fornecedor getFornecedor() {
-        return fornecedor;
-    }
+  public String getCodigoBarras() {
+    return codigoBarras;
+  }
 
-    // Métodos Setters
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+  public float getPrecoCusto() {
+    return precoCusto;
+  }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
+  public float getPrecoVenda() {
+    return precoVenda;
+  }
 
-    public void setCodigoBarras(String codigoBarras) {
-        this.codigoBarras = codigoBarras;
-    }
+  public int getQtdDisponivel() {
+    return qtdDisponivel;
+  }
 
-    public void setPrecoCusto(float precoCusto) {
-        this.precoCusto = precoCusto;
-    }
+  public Fornecedor getFornecedor() {
+    return fornecedor;
+  }
 
-    public void setPrecoVenda(float precoVenda) {
-        this.precoVenda = precoVenda;
-    }
+  // Métodos Setters
+  public void setNome(String nome) {
+    this.nome = nome;
+  }
 
-    public void setQtdDisponivel(int qtdDisponivel) {
-        this.qtdDisponivel = qtdDisponivel;
-    }
+  public void setDescricao(String descricao) {
+    this.descricao = descricao;
+  }
 
-    public void setFornecedor(Fornecedor f) {
-        this.fornecedor = f;
-    }
+  public void setCodigoBarras(String codigoBarras) {
+    this.codigoBarras = codigoBarras;
+  }
 
+  public void setPrecoCusto(float precoCusto) {
+    this.precoCusto = precoCusto;
+  }
+
+  public void setPrecoVenda(float precoVenda) {
+    this.precoVenda = precoVenda;
+  }
+
+  public void setQtdDisponivel(int qtdDisponivel) {
+    this.qtdDisponivel = qtdDisponivel;
+  }
+
+  public void setFornecedor(Fornecedor f) {
+    this.fornecedor = f;
+  }
 }

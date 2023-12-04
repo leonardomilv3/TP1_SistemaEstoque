@@ -1,5 +1,3 @@
 package com.sistemaestoque.app;
 
-public class Endereco {
-
-}
+public class Endereco {}

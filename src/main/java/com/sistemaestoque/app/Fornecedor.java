@@ -1,34 +1,31 @@
 package com.sistemaestoque.app;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Fornecedor {
 
-	private int idFornecedor;
-	private String nomeFantasia;
-	
-	public Fornecedor() {
-		//fornecedores = new 	ArrayList<Fornecedor>();
-	}
-	
-	public Fornecedor(int idFornecedor, String nomeFantasia) {
-		this.idFornecedor = idFornecedor;
-		this.nomeFantasia = nomeFantasia;
-	}
+  private int idFornecedor;
+  private String nomeFantasia;
 
-	public Integer getId() {
-		return this.idFornecedor;
-	}
+  public Fornecedor() {
+    // fornecedores = new 	ArrayList<Fornecedor>();
+  }
 
-	public String getNomeFantasia() {
-		return this.nomeFantasia;
-	}
+  public Fornecedor(int idFornecedor, String nomeFantasia) {
+    this.idFornecedor = idFornecedor;
+    this.nomeFantasia = nomeFantasia;
+  }
 
-//	private boolean idUnico(int idFornecedor2) {
-//		
-//		return false;
-//	}
-	
-	
+  public Integer getId() {
+    return this.idFornecedor;
+  }
+
+  public String getNomeFantasia() {
+    return this.nomeFantasia;
+  }
+
+  //	private boolean idUnico(int idFornecedor2) {
+  //
+  //		return false;
+  //	}
+
 }

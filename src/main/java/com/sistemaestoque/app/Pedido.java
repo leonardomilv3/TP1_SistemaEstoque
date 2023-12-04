@@ -3,91 +3,91 @@ package com.sistemaestoque.app;
 import com.sistemaestoque.app.exception.ValorInvalidoException;
 
 public class Pedido {
-    public enum Status {
-        PENDENTE,
-        FINALIZADO
+  public enum Status {
+    PENDENTE,
+    FINALIZADO
+  }
+
+  private Produto produto;
+  private int quantidade;
+  private float valorTotal;
+  private float valorUnitario;
+  private float desconto;
+  private Status status;
+
+  public Pedido(Produto produto, int quantidade, float valorUnitario, float desconto, Status status)
+      throws ValorInvalidoException {
+
+    if (quantidade <= 0) {
+      throw new ValorInvalidoException();
+    }
+    if (desconto < 0) {
+      throw new ValorInvalidoException();
+    }
+    if (valorUnitario <= 0) {
+      throw new ValorInvalidoException();
     }
 
-    private Produto produto;
-    private int quantidade;
-    private float valorTotal;
-    private float valorUnitario;
-    private float desconto;
-    private Status status;
+    this.produto = produto;
+    this.quantidade = quantidade;
+    this.valorUnitario = valorUnitario;
+    this.desconto = desconto;
+    this.status = status;
+    this.valorTotal = calcularValorTotal();
+  }
 
-    public Pedido(Produto produto, int quantidade, float valorUnitario, float desconto,
-            Status status) throws ValorInvalidoException {
+  public Status getStatus() {
+    return status;
+  }
 
-        if (quantidade <= 0) {
-            throw new ValorInvalidoException();
-        }
-        if (desconto < 0) {
-            throw new ValorInvalidoException();
-        }
-        if (valorUnitario <= 0) {
-            throw new ValorInvalidoException();
-        }
+  public void setStatus(Status status) {
+    this.status = status;
+  }
 
-        this.produto = produto;
-        this.quantidade = quantidade;
-        this.valorUnitario = valorUnitario;
-        this.desconto = desconto;
-        this.status = status;
-        this.valorTotal = calcularValorTotal();
-    }
+  public Produto getProduto() {
+    return produto;
+  }
 
-    public Status getStatus() {
-        return status;
-    }
+  public void setProduto(Produto produto) {
+    this.produto = produto;
+  }
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
+  public int getQuantidade() {
+    return quantidade;
+  }
 
-    public Produto getProduto() {
-        return produto;
-    }
+  public void setQuantidade(int quantidade) {
+    this.quantidade = quantidade;
+    this.valorTotal = calcularValorTotal();
+  }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
+  public float getValorTotal() {
+    return valorTotal;
+  }
 
-    public int getQuantidade() {
-        return quantidade;
-    }
+  public void setValorTotal(float valorTotal) {
+    this.valorTotal = valorTotal;
+  }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-        this.valorTotal = calcularValorTotal();
-    }
+  public float getValorUnitario() {
+    return valorUnitario;
+  }
 
-    public float getValorTotal() {
-        return valorTotal;
-    }
+  public void setValorUnitario(float valorUnitario) {
+    this.valorUnitario = valorUnitario;
+    this.valorTotal = calcularValorTotal();
+  }
 
-    public void setValorTotal(float valorTotal) {
-        this.valorTotal = valorTotal;
-    }
+  public float getDesconto() {
+    return desconto;
+  }
 
-    public float getValorUnitario() {
-        return valorUnitario;
-    }
+  public void setDesconto(float desconto) {
+    this.desconto = desconto;
+    this.valorTotal = calcularValorTotal();
+  }
 
-    public void setValorUnitario(float valorUnitario) {
-        this.valorUnitario = valorUnitario;
-        this.valorTotal = calcularValorTotal();
-    }
-
-    public float getDesconto() {
-        return desconto;
-    }
-
-    public void setDesconto(float desconto) {
-        this.desconto = desconto;
-        this.valorTotal = calcularValorTotal();
-    }
-
-    private float calcularValorTotal() {
-        return quantidade * valorUnitario * (1 - desconto / 100);
-    }
+  private float calcularValorTotal() {
+    return quantidade * valorUnitario * (1 - desconto / 100);
+  }
 }
