@@ -5,8 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import com.sistemaestoque.app.exception.*;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class EstoqueTest {
 
@@ -78,36 +82,38 @@ class EstoqueTest {
     assertNull(estoque.consultaEstoquePorCodigo("1234"));
   }
 
-  @Test
-  void testAlertaProdutoProximoDaDataDeValidade()
+  @ParameterizedTest
+  @MethodSource("getParameters")
+  void testAlertaProdutoProximoDaDataDeValidade(Produto produto, boolean expectedResult) {
+    estoque.armazenaProduto(produto);
+    assertEquals(expectedResult, estoque.alertaProdutoProximoDaValidade());
+  }
+
+  private static Stream<Arguments> getParameters()
       throws DescricaoEmBrancoException, ValorInvalidoException {
     Fornecedor forn = new Fornecedor(1, "Natura");
     Produto prod1 =
         new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
 
-    estoque.armazenaProduto(prod1);
-
-    assertEquals(estoque.alertaProdutoProximoDaValidade(), true);
-  }
-
-  @Test
-  void testAlertaProdutoProximoDaDataDeValidadeDois()
-      throws DescricaoEmBrancoException, ValorInvalidoException {
     Date dataAtual = new Date();
-
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(dataAtual);
-
     calendar.add(Calendar.DAY_OF_MONTH, 5);
-
     Date dataFutura = calendar.getTime();
 
-    Fornecedor forn = new Fornecedor(1, "Natura");
-    Produto prod1 =
+    Produto prod2 =
         new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, dataFutura);
 
-    estoque.armazenaProduto(prod1);
+    Date dataAtualProd3 = new Date();
+    Calendar calendarProd3 = Calendar.getInstance();
+    calendarProd3.setTime(dataAtualProd3);
+    calendarProd3.add(Calendar.DAY_OF_MONTH, 20);
+    Date dataFuturaProd3 = calendarProd3.getTime();
 
-    assertEquals(estoque.alertaProdutoProximoDaValidade(), true);
+    Produto prod3 =
+        new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, dataFuturaProd3);
+
+    return Stream.of(
+        Arguments.of(prod1, true), Arguments.of(prod2, true), Arguments.of(prod3, false));
   }
 }
