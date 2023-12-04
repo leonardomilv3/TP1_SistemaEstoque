@@ -87,7 +87,7 @@ class EstoqueTest {
 
     estoque.armazenaProduto(prod1);
 
-    assertTrue(estoque.alertaProdutoProximoDaValidade());
+    assertEquals(estoque.alertaProdutoProximoDaValidade(), true);
   }
 
   @Test
@@ -108,6 +108,6 @@ class EstoqueTest {
 
     estoque.armazenaProduto(prod1);
 
-    assertTrue(estoque.alertaProdutoProximoDaValidade());
+    assertEquals(estoque.alertaProdutoProximoDaValidade(), true);
   }
 }
