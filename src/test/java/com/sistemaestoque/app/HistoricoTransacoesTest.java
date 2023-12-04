@@ -25,15 +25,21 @@ public class HistoricoTransacoesTest {
     assertEquals(produto, historicoTransacoes.getTransacoes().get(0).getProduto());
   }
 
-  static Stream<Object[]> transacaoProdutoProvider() throws DescricaoEmBrancoException, ValorInvalidoException {
+  static Stream<Object[]> transacaoProdutoProvider()
+      throws DescricaoEmBrancoException, ValorInvalidoException {
     Fornecedor fornecedor = new Fornecedor(1, "Natura");
-    Produto produto1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor, new Date());
-    Produto produto2 = new Produto("Shampoo", "Produto de higiene", "1111", 3.0f, 4.0f, 15, fornecedor, new Date());
-    Produto produto3 = new Produto("Creme", "Produto de cuidados", "2222", 4.0f, 5.0f, 10, fornecedor, new Date());
+    Produto produto1 =
+        new Produto(
+            "Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor, new Date());
+    Produto produto2 =
+        new Produto(
+            "Shampoo", "Produto de higiene", "1111", 3.0f, 4.0f, 15, fornecedor, new Date());
+    Produto produto3 =
+        new Produto("Creme", "Produto de cuidados", "2222", 4.0f, 5.0f, 10, fornecedor, new Date());
 
     return Stream.of(
-        new Object[] { "Compra", produto1 },
-        new Object[] { "Venda", produto2 },
-        new Object[] { "Troca", produto3 });
+        new Object[] {"Compra", produto1},
+        new Object[] {"Venda", produto2},
+        new Object[] {"Troca", produto3});
   }
 }

@@ -5,12 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
 import com.sistemaestoque.app.exception.ValorInvalidoException;
+import java.util.Date;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.Date;
-import java.util.stream.Stream;
 
 public class ProdutoTest {
 
@@ -23,9 +22,18 @@ public class ProdutoTest {
       float precoCusto,
       float precoVenda,
       int qtdDisponivel,
-      Fornecedor fornecedor) throws DescricaoEmBrancoException, ValorInvalidoException {
-    Produto produto = new Produto(nome, descricao, codigoBarras, precoCusto, precoVenda, qtdDisponivel, fornecedor,
-        new Date());
+      Fornecedor fornecedor)
+      throws DescricaoEmBrancoException, ValorInvalidoException {
+    Produto produto =
+        new Produto(
+            nome,
+            descricao,
+            codigoBarras,
+            precoCusto,
+            precoVenda,
+            qtdDisponivel,
+            fornecedor,
+            new Date());
 
     assertEquals(nome, produto.getNome());
     assertEquals(descricao, produto.getDescricao());
@@ -40,9 +48,9 @@ public class ProdutoTest {
     Fornecedor fornecedor = new Fornecedor(1, "Natura");
 
     return Stream.of(
-        new Object[] { "Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor },
-        new Object[] { "Shampoo", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor },
-        new Object[] { "Detergente", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor });
+        new Object[] {"Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor},
+        new Object[] {"Shampoo", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor},
+        new Object[] {"Detergente", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor});
   }
 
   @Test

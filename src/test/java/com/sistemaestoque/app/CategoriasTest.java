@@ -3,10 +3,9 @@ package com.sistemaestoque.app;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.util.stream.Stream;
-
 import com.sistemaestoque.app.exception.DuplicadoException;
 import com.sistemaestoque.app.exception.ValorInvalidoException;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -24,9 +23,9 @@ public class CategoriasTest {
 
   static Stream<Object[]> categoriasProvider() throws ValorInvalidoException {
     return Stream.of(
-        new Object[] { new Categoria("Saúde") },
-        new Object[] { new Categoria("Limpeza") },
-        new Object[] { new Categoria("Tecnologia") });
+        new Object[] {new Categoria("Saúde")},
+        new Object[] {new Categoria("Limpeza")},
+        new Object[] {new Categoria("Tecnologia")});
   }
 
   @Test

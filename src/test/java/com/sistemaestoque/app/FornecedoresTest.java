@@ -3,12 +3,11 @@ package com.sistemaestoque.app;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.sistemaestoque.app.exception.ValorInvalidoException;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-
-import java.util.stream.Stream;
 
 public class FornecedoresTest {
 
@@ -33,8 +32,6 @@ public class FornecedoresTest {
 
   static Stream<Fornecedor> fornecedorProvider() {
     return Stream.of(
-        new Fornecedor(1, "JBS"),
-        new Fornecedor(2, "Natura"),
-        new Fornecedor(3, "Sony"));
+        new Fornecedor(1, "JBS"), new Fornecedor(2, "Natura"), new Fornecedor(3, "Sony"));
   }
 }
