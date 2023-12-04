@@ -4,7 +4,7 @@ import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
 import com.sistemaestoque.app.exception.ValorInvalidoException;
 import java.util.Date;
 
-public class Produto {
+public class Produto implements Observador {
 
   private static final int LIMITE_MINIMO = 10;
   private String nome;
@@ -62,10 +62,12 @@ public class Produto {
 
   public void adicionaQtdDisponivel(Integer quantidade) {
     this.qtdDisponivel += quantidade;
+    this.enviaNotificaoSeEstoqueBaixo();
   }
 
   public void diminuiQtdDisponivel(Integer quantidade) {
     this.qtdDisponivel -= quantidade;
+    this.enviaNotificaoSeEstoqueBaixo();
   }
 
   public String getNome() {
@@ -119,9 +121,21 @@ public class Produto {
 
   public void setQtdDisponivel(int qtdDisponivel) {
     this.qtdDisponivel = qtdDisponivel;
+    this.enviaNotificaoSeEstoqueBaixo();
   }
 
   public void setFornecedor(Fornecedor f) {
     this.fornecedor = f;
+  }
+  
+  private void enviaNotificaoSeEstoqueBaixo() {
+	 if (this.qtdDisponivel <= LIMITE_MINIMO) {
+	   	this.notificarBaixoEstoque(this);
+	 }
+  }
+
+  @Override
+  public void notificarBaixoEstoque(Produto produto) {
+	System.out.println("ALERTA: " + produto.getNome() + " com estoque baixo! Qtd: " + produto.getQtdDisponivel() );
   }
 }
