@@ -3,24 +3,27 @@ package com.sistemaestoque.app;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+import java.util.stream.Stream;
+
 import com.sistemaestoque.app.exception.ValorInvalidoException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class CategoriaTest {
 
-  @Test
-  void testCadastrarCategoria() throws ValorInvalidoException {
-    Categoria categoria = new Categoria("Saúde");
-    assertEquals("Saúde", categoria.getCategoria());
+  static Stream<Object> categoriaProvider() {
+    return Stream.of(
+        new Object[] { "Saúde" },
+        new Object[] { "Frios" },
+        new Object[] { "Limpeza"});
   }
 
-  @Test
-  void testCadastrarDuasCategorias() throws ValorInvalidoException {
-    Categoria categoria1 = new Categoria("Frios");
-    Categoria categoria2 = new Categoria("Padaria");
-
-    assertEquals("Frios", categoria1.getCategoria());
-    assertEquals("Padaria", categoria2.getCategoria());
+  @ParameterizedTest
+  @MethodSource("categoriaProvider")
+  void testCadastrarCategoria(String name) throws ValorInvalidoException {
+    Categoria categoria = new Categoria(name);
+    assertEquals(categoria.getCategoria(), name);
   }
 
   @Test
