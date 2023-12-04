@@ -38,3 +38,10 @@ mvn test
 ```bash
 mvn exec:java
 ```
+## Como formatar o código
+
+```bash
+mvn com.spotify.fmt:fmt-maven-plugin:format
+```
+
+Referência utilizada para a formatação: https://github.com/google/google-java-format
