@@ -17,6 +17,12 @@ public class App {
     Scanner scanner = new Scanner(System.in);
     categorias = new Categorias();
     fornecedoresDb = new Fornecedores();
+    estoque = new Estoque();
+
+    // cadastra fornecedor padrao 
+    Fornecedor df = new Fornecedor(1, "default");
+    fornecedoresDb.cadastraFornecedor(df);
+
     while (true) {
       App.menu();
       int option = scanner.nextInt();
