@@ -24,8 +24,7 @@ class EstoqueTest {
   @Test
   void testArmazenaUmProdutoNoEstoque() throws DescricaoEmBrancoException, ValorInvalidoException {
     Fornecedor forn = new Fornecedor();
-    Produto prod1 =
-        new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, forn, new Date());
+    Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, forn, new Date());
     estoque.armazenaProduto(prod1);
     assertEquals(1, estoque.listaProdutosArmazenados().size());
   }
@@ -33,8 +32,7 @@ class EstoqueTest {
   @Test
   void testAlertaEstoqueBaixoUmProduto() throws DescricaoEmBrancoException, ValorInvalidoException {
     Fornecedor forn = new Fornecedor();
-    Produto prod1 =
-        new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
+    Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
     estoque.adicionarObservador(new AlertaEstoqueBaixo());
     assertEquals(
         "Produto: Sabonete | Qtd disponível: 1", estoque.notificarObservadoresBaixoEstoque(prod1));
@@ -44,10 +42,8 @@ class EstoqueTest {
   void testAlertaEstoqueBaixoDoisProduto()
       throws DescricaoEmBrancoException, ValorInvalidoException {
     Fornecedor forn = new Fornecedor();
-    Produto prod1 =
-        new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
-    Produto prod2 =
-        new Produto("Caixa Ovos", "Mercearia", "0001", 15.0f, 20.0f, 3, forn, new Date());
+    Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
+    Produto prod2 = new Produto("Caixa Ovos", "Mercearia", "0001", 15.0f, 20.0f, 3, forn, new Date());
 
     estoque.adicionarObservador(new AlertaEstoqueBaixo());
     estoque.armazenaProduto(prod1);
@@ -63,8 +59,7 @@ class EstoqueTest {
   @Test
   void testConsultaProdutoPorNome() throws DescricaoEmBrancoException, ValorInvalidoException {
     Fornecedor forn = new Fornecedor(1, "Natura");
-    Produto prod1 =
-        new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
+    Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
     estoque.armazenaProduto(prod1);
 
     assertNotNull(estoque.consultaEstoquePorNome("Sabonete"));
@@ -74,8 +69,7 @@ class EstoqueTest {
   @Test
   void testConsultaProdutoPorCodigo() throws DescricaoEmBrancoException, ValorInvalidoException {
     Fornecedor forn = new Fornecedor(1, "Natura");
-    Produto prod1 =
-        new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
+    Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
     estoque.armazenaProduto(prod1);
 
     assertNotNull(estoque.consultaEstoquePorCodigo("0000"));
@@ -92,8 +86,7 @@ class EstoqueTest {
   private static Stream<Arguments> getParameters()
       throws DescricaoEmBrancoException, ValorInvalidoException {
     Fornecedor forn = new Fornecedor(1, "Natura");
-    Produto prod1 =
-        new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
+    Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
 
     Date dataAtual = new Date();
     Calendar calendar = Calendar.getInstance();
@@ -101,8 +94,7 @@ class EstoqueTest {
     calendar.add(Calendar.DAY_OF_MONTH, 5);
     Date dataFutura = calendar.getTime();
 
-    Produto prod2 =
-        new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, dataFutura);
+    Produto prod2 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, dataFutura);
 
     Date dataAtualProd3 = new Date();
     Calendar calendarProd3 = Calendar.getInstance();
@@ -110,8 +102,7 @@ class EstoqueTest {
     calendarProd3.add(Calendar.DAY_OF_MONTH, 20);
     Date dataFuturaProd3 = calendarProd3.getTime();
 
-    Produto prod3 =
-        new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, dataFuturaProd3);
+    Produto prod3 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, dataFuturaProd3);
 
     return Stream.of(
         Arguments.of(prod1, true), Arguments.of(prod2, true), Arguments.of(prod3, false));
