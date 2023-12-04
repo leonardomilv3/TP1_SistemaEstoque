@@ -105,9 +105,28 @@ public class App {
           categorias.listaTudo();
           break;
         case 7:
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+            prodList = estoque.listaProdutosArmazenados();
+            System.out.println("Produtos disponíveis: ");
+            if(prodList.size() == 0 ){
+              System.out.println("Não há produtos ainda");
+              break;
+            }
+            for(Produto prod : prodList) {
+              System.out.print(prod.getNome() + ":" + prod.getCodigoBarras() + "\n");
+            }
+            System.out.println("Digite o código de barras de um produto: ");
+            String codigo = scanner.next();
+            System.out.println("Digite a quantidade desejada: ");
+            int quantidade = scanner.nextInt();
+            Produto estoquePorCodigo = estoque.consultaEstoquePorCodigo(codigo);
+            System.out.println("Compra feita! Preço: " + quantidade * estoquePorCodigo.getPrecoVenda());
+            estoquePorCodigo.setQtdDisponivel(estoquePorCodigo.getQtdDisponivel() - quantidade);
+          break;
+        case 8:
           System.exit(1);
           break;
-
         default:
           break;
       }
@@ -122,6 +141,7 @@ public class App {
     System.out.println("--------- 4. Listar Estoque         ---------");
     System.out.println("--------- 5. Listar Categorias      ---------");
     System.out.println("--------- 6. Relatório              ---------");
-    System.out.println("--------- 7. Sair                   ---------");
+    System.out.println("--------- 7. Comprar                ---------");
+    System.out.println("--------- 8. Sair                   ---------");
   }
 }
