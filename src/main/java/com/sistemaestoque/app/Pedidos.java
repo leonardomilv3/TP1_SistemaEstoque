@@ -14,8 +14,7 @@ public class Pedidos {
     return this.pedidos;
   }
 
-  public String adicionaPedido(Pedido p) {
-    //		this.pedidos.add(p);
-    return "Pedido Cadastrado";
+  public void adicionaPedido(Pedido p) {
+    this.pedidos.add(p);
   }
 }

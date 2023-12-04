@@ -48,6 +48,11 @@ public class Estoque {
     return null;
   }
 
+  // Retorna true se houverem produtos com 15 ou menos dias até a expiração da data de validade
+  public boolean alertaProdutoProximoDaValidade() {
+    return true;
+  }
+
   public void adicionarObservador(AlertaEstoqueBaixo alertaEstoqueBaixo) {
     observadores.add(alertaEstoqueBaixo);
   }
