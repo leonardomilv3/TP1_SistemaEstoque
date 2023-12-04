@@ -2,36 +2,30 @@ package com.sistemaestoque.app;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.stream.Stream;
+
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
+import com.sistemaestoque.app.exception.ValorInvalidoException;
+
 class FornecedorTest {
+    static Stream<Object[]> fornecedoresProvider() throws ValorInvalidoException {
+    return Stream.of(
+        new Object[] { 1, "Natura" },
+        new Object[] { 2, "Samsung"},
+        new Object[] { 3, "Friboi" });
+  }
 
-  Fornecedor fornecedor;
+  @ParameterizedTest
+  @MethodSource("fornecedoresProvider")
+  public void testCriacaoFornecedor(int id, String nomeFantasia)
+      throws DescricaoEmBrancoException, ValorInvalidoException {
+    Fornecedor fornecedor = new Fornecedor(id, nomeFantasia);
 
-  // @BeforeEach
-  // public void setUp() throws Exception {
-  //	this.fornecedor = new Fornecedor();
-  // }
+    assertEquals(fornecedor.getId(), id);
+    assertEquals(fornecedor.getNomeFantasia(), nomeFantasia);
 
-  // @Test
-  // void testCadastraUmFornecedor() {
-  //	Fornecedor forn1 = new Fornecedor(1, "Natura");
-  //	assertEquals(1, forn1.getId());
-  //	assertEquals("Natura", forn1.getNomeFantasia());
-  //	assertEquals(1, Fornecedor.qtdFornecedor());
-  // }
-  //
-  // @Test
-  // void testCadastraDoisFornecedores() {
-  //	Fornecedor forn1 = new Fornecedor(1, "Natura");
-  //	Fornecedor forn2 = new Fornecedor(2, "Samsung");
-  //	assertEquals(2, Fornecedor.qtdFornecedor());
-  // }
-  //
-  // @Test
-  // void testCadastraTresFornecedores() {
-  //	Fornecedor forn1 = new Fornecedor(1, "Natura");
-  //	Fornecedor forn2 = new Fornecedor(2, "Samsung");
-  //	Fornecedor forn3 = new Fornecedor(3, "Friboi");
-  //	assertEquals(3, Fornecedor.qtdFornecedor());
-  // }
-
+  }
 }
