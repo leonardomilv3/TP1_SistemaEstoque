@@ -116,7 +116,7 @@ public class App {
           System.out.flush();
           categorias.listaTudo();
           break;
-        case 7:
+        case 6:
             System.out.print("\033[H\033[2J");
             System.out.flush();
             prodList = estoque.listaProdutosArmazenados();
@@ -143,7 +143,7 @@ public class App {
                 + " | " + dataCompra);
             estoquePorCodigo.diminuiQtdDisponivel(quantidade);
           break;
-        case 8:
+        case 7:
           System.out.print("\033[H\033[2J");
           System.out.flush();
           System.out.print("COMPRAS REALIZADAS\n");
@@ -155,7 +155,7 @@ public class App {
             cnt++;
           }
           break;
-        case 9:
+        case 8:
           System.exit(1);
           break;
         default:
@@ -171,9 +171,8 @@ public class App {
     System.out.println("--------- 3. Cadastro de Produto    ---------");
     System.out.println("--------- 4. Listar Estoque         ---------");
     System.out.println("--------- 5. Listar Categorias      ---------");
-    System.out.println("--------- 6. Relatório              ---------");
-    System.out.println("--------- 7. Comprar                ---------");
-    System.out.println("--------- 8. Hist. de transações    ---------");
-    System.out.println("--------- 9. Sair                   ---------");
+    System.out.println("--------- 6. Comprar                ---------");
+    System.out.println("--------- 7. Hist. de transações    ---------");
+    System.out.println("--------- 8. Sair                   ---------");
   }
 }
