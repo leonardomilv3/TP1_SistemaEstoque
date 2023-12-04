@@ -3,6 +3,7 @@ package com.sistemaestoque.app;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.sistemaestoque.app.exception.*;
+import java.util.Calendar;
 import java.util.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -83,6 +84,27 @@ class EstoqueTest {
     Fornecedor forn = new Fornecedor(1, "Natura");
     Produto prod1 =
         new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
+
+    estoque.armazenaProduto(prod1);
+
+    assertTrue(estoque.alertaProdutoProximoDaValidade());
+  }
+
+  @Test
+  void testAlertaProdutoProximoDaDataDeValidadeDois()
+      throws DescricaoEmBrancoException, ValorInvalidoException {
+    Date dataAtual = new Date();
+
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(dataAtual);
+
+    calendar.add(Calendar.DAY_OF_MONTH, 5);
+
+    Date dataFutura = calendar.getTime();
+
+    Fornecedor forn = new Fornecedor(1, "Natura");
+    Produto prod1 =
+        new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, dataFutura);
 
     estoque.armazenaProduto(prod1);
 

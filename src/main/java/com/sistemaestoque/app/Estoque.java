@@ -1,6 +1,8 @@
 package com.sistemaestoque.app;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Estoque {
@@ -48,9 +50,27 @@ public class Estoque {
     return null;
   }
 
-  // Retorna true se houverem produtos com 15 ou menos dias até a expiração da data de validade
+  // Verifica se a data de validade é até 15 dias próximos da data atual e manda alerta
   public boolean alertaProdutoProximoDaValidade() {
-    return true;
+    Date hoje = new Date();
+
+    Calendar dataAtual = Calendar.getInstance();
+    dataAtual.setTime(hoje);
+
+    dataAtual.add(Calendar.DAY_OF_MONTH, 15);
+
+    for (Produto p : listaProduto) {
+      Date dataValidade = p.getDataValidade();
+      if (dataValidade != null) {
+        Calendar dataValidadeCal = Calendar.getInstance();
+        dataValidadeCal.setTime(dataValidade);
+
+        if (dataValidadeCal.before(dataAtual) || dataValidadeCal.equals(dataAtual)) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   public void adicionarObservador(AlertaEstoqueBaixo alertaEstoqueBaixo) {
