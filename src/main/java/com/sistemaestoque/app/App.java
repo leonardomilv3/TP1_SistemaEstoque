@@ -78,7 +78,18 @@ public class App {
           float precoVenda = scanner.nextFloat();
           System.out.print("Quantidade: ");
           int qtdDisponivel = scanner.nextInt();
-          int idFornecedor = 1;
+
+          System.out.print("Escolha o fornecedor:\n");
+          ArrayList<Fornecedor> fList1 = fornecedoresDb.listarFornecedores();
+          for(int i=0; i<fList1.size(); i++) {
+            Fornecedor f1 = fList1.get(i);
+            System.out.print(i + ": ");
+            System.out.print(f1.getNomeFantasia());
+            if(i != fList1.size()-1)
+              System.out.print(", ");
+          }
+          System.out.print("\n");
+          int idFornecedor = scanner.nextInt();
           System.out.print("Ano do vencimento: ");
           int dataA = scanner.nextInt();
           System.out.print("Mês do vencimento: ");
@@ -88,6 +99,7 @@ public class App {
           Date dataValidade = new Date();
           dataValidade.setMonth(dataM);
           dataValidade.setYear(dataA);
+
 
           Produto p = new Produto(nomeProd, descricao, codigoBarras,
               precoCusto, precoVenda, qtdDisponivel, fornecedoresDb.listarFornecedores().get(0), dataValidade);
