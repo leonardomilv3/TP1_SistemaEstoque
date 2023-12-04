@@ -5,6 +5,7 @@ import com.sistemaestoque.app.exception.DuplicadoException;
 import com.sistemaestoque.app.exception.ValorInvalidoException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 
 public class App {
@@ -53,6 +54,7 @@ public class App {
           }
           Fornecedor f = new Fornecedor(id, nome);
           fornecedoresDb.cadastraFornecedor(f);
+          System.out.print("FORNECEDOR CADASTRADO\n");
           break;
         case 3:
           System.out.print("\033[H\033[2J");
@@ -92,6 +94,10 @@ public class App {
         case 4:
           System.out.print("\033[H\033[2J");
           System.out.flush();
+          List<Produto> prodList = estoque.listaProdutosArmazenados();
+          for(Produto prod : prodList) {
+            System.out.print(prod.getCodigoBarras() + "\n");
+          }
           break;
         case 5:
           System.out.print("\033[H\033[2J");
