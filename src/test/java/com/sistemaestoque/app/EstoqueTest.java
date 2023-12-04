@@ -77,6 +77,25 @@ class EstoqueTest {
   }
 
   @ParameterizedTest
+  @MethodSource("produtosProvider")
+  void testConsultaProdutoPorCodigo(Produto produto) {
+    estoque.armazenaProduto(produto);
+    assertNotNull(estoque.consultaEstoquePorCodigo(produto.getCodigoBarras()));
+  }
+
+  private static Stream<Produto> produtosProvider() 
+      throws DescricaoEmBrancoException, ValorInvalidoException {
+    Fornecedor forn = new Fornecedor(1, "Natura");
+    Produto prod1 = new Produto("Sabão em pó", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
+    Produto prod2 = new Produto("Sabonete", "Produto de limpeza", "1234", 2.0f, 3.0f, 1, forn, new Date());
+    Produto prod3 = new Produto("Esponja de limpesa", "Produto de limpeza", "4321", 2.0f, 3.0f, 1, forn, new Date());
+    return Stream.of(
+      prod1,
+      prod2,
+      prod3);
+  }
+
+  @ParameterizedTest
   @MethodSource("getParameters")
   void testAlertaProdutoProximoDaDataDeValidade(Produto produto, boolean expectedResult) {
     estoque.armazenaProduto(produto);
