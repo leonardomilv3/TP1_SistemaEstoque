@@ -9,6 +9,7 @@ import com.sistemaestoque.app.exception.ValorInvalidoException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Date;
 import java.util.stream.Stream;
 
 public class PedidoTest {
@@ -18,7 +19,7 @@ public class PedidoTest {
     public void testCriacaoClassePedido(int quantidade, int valorUnitario, float desconto, float totalEsperado)
             throws ValorInvalidoException, DescricaoEmBrancoException {
         Fornecedor fornecedor = new Fornecedor(1, "Natura");
-        Produto produto = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor);
+        Produto produto = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor, new Date());
 
         Pedido pedido = new Pedido(produto, quantidade, valorUnitario, desconto, Pedido.Status.FINALIZADO);
 
@@ -36,7 +37,8 @@ public class PedidoTest {
     void testCadastrarPedidoInvalido() throws ValorInvalidoException {
         assertThrowsExactly(ValorInvalidoException.class, () -> {
             Fornecedor fornecedor = new Fornecedor(1, "Natura");
-            Produto produto = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor);
+            Produto produto = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor,
+                    new Date());
 
             new Pedido(produto, -1, -1, -1, Pedido.Status.FINALIZADO);
         });

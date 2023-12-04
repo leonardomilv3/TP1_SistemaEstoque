@@ -2,6 +2,8 @@ package com.sistemaestoque.app;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Date;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +20,7 @@ public class ProdutoTest {
 	public void setup() throws DescricaoEmBrancoException, ValorInvalidoException {
 		fornecedor = new Fornecedor();
 		forn = new Fornecedor(1, "Natura");
-		prod = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, forn);
+		prod = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, forn, new Date());
 	}
 
 	@Test
@@ -35,13 +37,13 @@ public class ProdutoTest {
 	@Test
 	public void testCadastrarUmProdutoDescricaoEmBranco() throws DescricaoEmBrancoException, ValorInvalidoException {
 		Assertions.assertThrows(DescricaoEmBrancoException.class,
-				() -> prod = new Produto(null, null, null, 1f, 1f, 1, forn));
+				() -> prod = new Produto(null, null, null, 1f, 1f, 1, forn, new Date()));
 	}
 
 	@Test
 	public void testCadastrarUmProdutoValorInvalido() throws DescricaoEmBrancoException, ValorInvalidoException {
 		Assertions.assertThrows(ValorInvalidoException.class,
-				() -> prod = new Produto("a", "b", "c", -1f, 1f, 1, forn));
+				() -> prod = new Produto("a", "b", "c", -1f, 1f, 1, forn, new Date()));
 	}
 
 }

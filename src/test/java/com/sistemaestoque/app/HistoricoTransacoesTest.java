@@ -7,12 +7,15 @@ import com.sistemaestoque.app.exception.ValorInvalidoException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Date;
+
 public class HistoricoTransacoesTest {
 
     @Test
     public void testCriacaoTransacao() throws DescricaoEmBrancoException, ValorInvalidoException {
-        Fornecedor fornecedor = new Fornecedor(1, "Natura");;
-        Produto produto = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor);
+        Fornecedor fornecedor = new Fornecedor(1, "Natura");
+        ;
+        Produto produto = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor, new Date());
         Transacao transacao = new Transacao("TIPO TRANSACAO", produto);
         HistoricoTransacoes historicoTransacoes = new HistoricoTransacoes();
         historicoTransacoes.registraTransacao(transacao);

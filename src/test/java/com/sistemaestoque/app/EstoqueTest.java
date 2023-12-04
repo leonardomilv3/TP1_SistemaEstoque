@@ -4,6 +4,8 @@ import com.sistemaestoque.app.exception.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Date;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +21,7 @@ class EstoqueTest {
 	@Test
 	void testArmazenaUmProdutoNoEstoque() throws DescricaoEmBrancoException, ValorInvalidoException {
 		Fornecedor forn = new Fornecedor();
-		Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, forn);
+		Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, forn, new Date());
 		estoque.armazenaProduto(prod1);
 		assertEquals(1, estoque.listaProdutosArmazenados().size());
 	}
@@ -27,7 +29,7 @@ class EstoqueTest {
 	@Test
 	void testAlertaEstoqueBaixoUmProduto() throws DescricaoEmBrancoException, ValorInvalidoException {
 		Fornecedor forn = new Fornecedor();
-		Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn);
+		Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
 		estoque.adicionarObservador(new AlertaEstoqueBaixo());
 		assertEquals("Produto: Sabonete | Qtd disponível: 1", estoque.notificarObservadoresBaixoEstoque(prod1));
 	}
@@ -35,8 +37,8 @@ class EstoqueTest {
 	@Test
 	void testAlertaEstoqueBaixoDoisProduto() throws DescricaoEmBrancoException, ValorInvalidoException {
 		Fornecedor forn = new Fornecedor();
-		Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn);
-		Produto prod2 = new Produto("Caixa Ovos", "Mercearia", "0001", 15.0f, 20.0f, 3, forn);
+		Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
+		Produto prod2 = new Produto("Caixa Ovos", "Mercearia", "0001", 15.0f, 20.0f, 3, forn, new Date());
 
 		estoque.adicionarObservador(new AlertaEstoqueBaixo());
 		estoque.armazenaProduto(prod1);
@@ -49,7 +51,7 @@ class EstoqueTest {
 	@Test
 	void testConsultaProdutoPorNome() throws DescricaoEmBrancoException, ValorInvalidoException {
 		Fornecedor forn = new Fornecedor(1, "Natura");
-		Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn);
+		Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
 		estoque.armazenaProduto(prod1);
 
 		assertNotNull(estoque.consultaEstoquePorNome("Sabonete"));
@@ -59,7 +61,7 @@ class EstoqueTest {
 	@Test
 	void testConsultaProdutoPorCodigo() throws DescricaoEmBrancoException, ValorInvalidoException {
 		Fornecedor forn = new Fornecedor(1, "Natura");
-		Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn);
+		Produto prod1 = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 1, forn, new Date());
 		estoque.armazenaProduto(prod1);
 
 		assertNotNull(estoque.consultaEstoquePorCodigo("0000"));

@@ -3,6 +3,8 @@ package com.sistemaestoque.app;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.Date;
+
 import org.junit.jupiter.api.Test;
 
 import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
@@ -22,7 +24,7 @@ public class FilialTest {
     public void testAdicionaProdutoFilial() throws DescricaoEmBrancoException, ValorInvalidoException {
         Filial filial = new Filial("FILIAL 1");
         Fornecedor fornecedor = new Fornecedor();
-        Produto produto = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor);
+        Produto produto = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor, new Date());
         filial.adicionaProdutos(produto);
 
         assertEquals(1, filial.listaProdutos().size());

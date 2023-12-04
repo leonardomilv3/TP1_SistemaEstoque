@@ -2,21 +2,23 @@ package com.sistemaestoque.app;
 
 import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
 import com.sistemaestoque.app.exception.ValorInvalidoException;
+import java.util.Date;
 
 public class Produto {
 
     private static final int LIMITE_MINIMO = 10;
-	private String nome;
+    private String nome;
     private String descricao;
     private String codigoBarras;
     private float precoCusto;
     private float precoVenda;
     private int qtdDisponivel;
     private Fornecedor fornecedor;
+    private Date dataValidade;
 
     public Produto(String nome, String descricao, String codigoBarras,
             float precoCusto, float precoVenda, int qtdDisponivel,
-            Fornecedor fornecedor) throws DescricaoEmBrancoException, ValorInvalidoException {
+            Fornecedor fornecedor, Date dataValidade) throws DescricaoEmBrancoException, ValorInvalidoException {
 
         if (nome == null || nome == "") {
             throw new DescricaoEmBrancoException("Nome inválido");
@@ -40,6 +42,15 @@ public class Produto {
         this.precoVenda = precoVenda;
         this.qtdDisponivel = qtdDisponivel;
         this.fornecedor = fornecedor;
+        this.dataValidade = dataValidade;
+    }
+
+    public Date getDataValidade() {
+        return dataValidade;
+    }
+
+    public void setDataValidade(Date dataValidade) {
+        this.dataValidade = dataValidade;
     }
 
     public String getNome() {
