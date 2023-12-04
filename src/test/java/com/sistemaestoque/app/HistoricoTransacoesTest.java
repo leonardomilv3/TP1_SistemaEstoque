@@ -34,8 +34,6 @@ public class HistoricoTransacoesTest {
     return Stream.of(
         new Object[] { "Compra", produto1 },
         new Object[] { "Venda", produto2 },
-        new Object[] { "Troca", produto3 }
-    // Adicione mais conjuntos de transações e produtos para testar
-    );
+        new Object[] { "Troca", produto3 });
   }
 }

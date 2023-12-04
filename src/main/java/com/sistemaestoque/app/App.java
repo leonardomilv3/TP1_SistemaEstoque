@@ -3,6 +3,7 @@ package com.sistemaestoque.app;
 import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
 import com.sistemaestoque.app.exception.DuplicadoException;
 import com.sistemaestoque.app.exception.ValorInvalidoException;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Date;
 public class App {
   private static Categorias categorias;
   private static Fornecedores fornecedoresDb;
+  private static ArrayList<String> historico;
   private static Estoque estoque;
 
   public static void main(String[] args)
@@ -19,6 +21,7 @@ public class App {
     categorias = new Categorias();
     fornecedoresDb = new Fornecedores();
     estoque = new Estoque();
+    historico = new ArrayList();
 
     // cadastra fornecedor padrao 
     Fornecedor df = new Fornecedor(1, "default");
@@ -131,9 +134,28 @@ public class App {
             int quantidade = scanner.nextInt();
             Produto estoquePorCodigo = estoque.consultaEstoquePorCodigo(codigo);
             System.out.println("Compra feita! Preço: " + quantidade * estoquePorCodigo.getPrecoVenda());
-            estoquePorCodigo.setQtdDisponivel(estoquePorCodigo.getQtdDisponivel() - quantidade);
+            LocalDate dataCompra = LocalDate.now();
+            historico.add(estoquePorCodigo.getNome()
+                + " | " + estoquePorCodigo.getQtdDisponivel()
+                + " | " + estoquePorCodigo.getPrecoVenda()
+                + " | " + estoquePorCodigo.getPrecoVenda()*quantidade
+                + " | " + estoquePorCodigo.getQtdDisponivel()
+                + " | " + dataCompra);
+            estoquePorCodigo.diminuiQtdDisponivel(quantidade);
           break;
         case 8:
+          System.out.print("\033[H\033[2J");
+          System.out.flush();
+          System.out.print("COMPRAS REALIZADAS\n");
+          System.out.println("Nome | Qtd. | Preço | Total | Data\n");
+          cnt = 1;
+          for(String compra: historico) {
+            System.out.println(cnt + ": ");
+            System.out.println(compra + "\n");
+            cnt++;
+          }
+          break;
+        case 9:
           System.exit(1);
           break;
         default:
@@ -151,6 +173,7 @@ public class App {
     System.out.println("--------- 5. Listar Categorias      ---------");
     System.out.println("--------- 6. Relatório              ---------");
     System.out.println("--------- 7. Comprar                ---------");
-    System.out.println("--------- 8. Sair                   ---------");
+    System.out.println("--------- 8. Hist. de transações    ---------");
+    System.out.println("--------- 9. Sair                   ---------");
   }
 }
