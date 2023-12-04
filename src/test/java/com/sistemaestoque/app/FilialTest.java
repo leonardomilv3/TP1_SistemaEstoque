@@ -9,8 +9,11 @@ import com.sistemaestoque.app.exception.ValorInvalidoException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class FilialTest {
 
@@ -43,6 +46,10 @@ public class FilialTest {
 
     assertEquals("1234", produtoVendido.getCodigoBarras());
   }
+  
+  
+  
+  
   
   @Test
   public void testTranferenciaUmProdutoEntre2Filiais() throws DescricaoEmBrancoException, ValorInvalidoException {
@@ -99,5 +106,51 @@ public class FilialTest {
 	  assertEquals(35, qtdProd4);
   }
   
+  
+  @Test
+  public void testTranferenciaTresProdutoEntre2Filiais() throws DescricaoEmBrancoException, ValorInvalidoException {
+	  Filial filial1 = new Filial("FILIAL 1");
+	  Filial filial2 = new Filial("FILIAL 2");
+	  
+	  Produto prod1 = filial1.vendeProduto("1234");
+	  filial1.adicionaProdutos(prod1);
+	  
+	  Produto prod2 = filial2.vendeProduto("4321");
+	  filial2.adicionaProdutos(prod2);
+	  
+	  filial1.tranfereProdutoParaFilial(filial2, prod1.getNome(), 10);
+	  
+	  
+	  Fornecedor fornecedor = new Fornecedor();
+	  Produto prod3 = new Produto("Shampoo", "Produto de limpeza", "0001", 2.0f, 3.0f, 20, fornecedor, new Date());
+	  Produto prod4 = new Produto("Shampoo", "Produto de limpeza", "0002", 2.0f, 3.0f, 20, fornecedor, new Date());
+	  
+	  Produto prod5 = new Produto("Detergente", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor, new Date());
+	  Produto prod6 = new Produto("Detergente", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor, new Date());
+	  
+	  
+	  filial1.adicionaProdutos(prod3);
+	  filial1.adicionaProdutos(prod5);
+	  
+	  filial2.adicionaProdutos(prod4);
+	  filial2.adicionaProdutos(prod6);
+	  
+	  filial1.tranfereProdutoParaFilial(filial2, prod3.getNome(), 15);
+	  filial1.tranfereProdutoParaFilial(filial2, prod5.getNome(), 5);
+	  
+	  int qtdProd1 = prod1.getQtdDisponivel();
+	  int qtdProd2 = prod2.getQtdDisponivel();
+	  int qtdProd3 = prod3.getQtdDisponivel();
+	  int qtdProd4 = prod4.getQtdDisponivel();
+	  int qtdProd5 = prod5.getQtdDisponivel();
+	  int qtdProd6 = prod6.getQtdDisponivel();
+	  
+	  assertEquals(10, qtdProd1);
+	  assertEquals(30, qtdProd2);
+	  assertEquals(5, qtdProd3);
+	  assertEquals(35, qtdProd4);
+	  assertEquals(15, qtdProd5);
+	  assertEquals(25, qtdProd6);
+  }
   
 }
