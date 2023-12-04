@@ -12,4 +12,8 @@ public class Fornecedores {
   public ArrayList<Fornecedor> listarFornecedores() {
     return fornecedores;
   }
+
+  public void cadastraFornecedor(Fornecedor f) {
+    fornecedores.add(f);
+  }
 }

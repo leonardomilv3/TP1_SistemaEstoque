@@ -19,4 +19,11 @@ public class FornecedoresTest {
   void testListarFornecedores() throws ValorInvalidoException {
     assertEquals(true, fornecedoresDb.listarFornecedores().isEmpty());
   }
+  
+  @Test
+  void testCadastraFornecedor() {
+    Fornecedor f = new Fornecedor(1, "JBS");
+    fornecedoresDb.cadastraFornecedor(f);
+    assertEquals(1, fornecedoresDb.listarFornecedores().size());
+  }
 }
