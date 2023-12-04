@@ -4,15 +4,18 @@ import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
 import com.sistemaestoque.app.exception.DuplicadoException;
 import com.sistemaestoque.app.exception.ValorInvalidoException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class App {
-  private static Scanner scanner;
   private static Categorias categorias;
+  private static Fornecedores fornecedoresDb;
+  private static Estoque estoque;
 
   public static void main(String[] args)
       throws ValorInvalidoException, DescricaoEmBrancoException, DuplicadoException {
-    scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
     categorias = new Categorias();
+    fornecedoresDb = new Fornecedores();
     while (true) {
       App.menu();
       int option = scanner.nextInt();
@@ -30,6 +33,18 @@ public class App {
         case 2:
           System.out.print("\033[H\033[2J");
           System.out.flush();
+
+          System.out.print("CADASTRO DE FORNECEDOR\n");
+          System.out.print("Nome: ");
+          scanner.nextLine(); // remove '\n'
+          String nome = scanner.nextLine();
+          int id = 1;
+          ArrayList<Fornecedor> fList = fornecedoresDb.listarFornecedores();
+          if(!fList.isEmpty()) {
+            id = fList.get(fList.size()-1).getId();
+          }
+          Fornecedor f = new Fornecedor(id, nome);
+          fornecedoresDb.cadastraFornecedor(f);
           break;
         case 3:
           System.out.print("\033[H\033[2J");
