@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
 import com.sistemaestoque.app.exception.ValorInvalidoException;
+import java.util.Date;
 import org.junit.jupiter.api.Test;
 
 public class FilialTest {
@@ -23,7 +24,8 @@ public class FilialTest {
     Filial filial = new Filial("FILIAL 1");
     Fornecedor fornecedor = new Fornecedor();
     Produto produto =
-        new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor);
+        new Produto(
+            "Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor, new Date());
     filial.adicionaProdutos(produto);
 
     assertEquals(1, filial.listaProdutos().size());

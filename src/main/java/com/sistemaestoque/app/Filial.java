@@ -2,6 +2,7 @@ package com.sistemaestoque.app;
 
 import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
 import com.sistemaestoque.app.exception.ValorInvalidoException;
+import java.util.Date;
 import java.util.List;
 
 public class Filial {
@@ -29,7 +30,8 @@ public class Filial {
       throws DescricaoEmBrancoException, ValorInvalidoException {
     Fornecedor forn = new Fornecedor();
     Produto produto =
-        new Produto("Sabonete", "Produto de limpeza", codigoDeBarras, 2.0f, 3.0f, 20, forn);
+        new Produto(
+            "Sabonete", "Produto de limpeza", codigoDeBarras, 2.0f, 3.0f, 20, forn, new Date());
     return produto;
   }
 }

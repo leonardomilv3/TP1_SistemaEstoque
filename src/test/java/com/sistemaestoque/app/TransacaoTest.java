@@ -14,7 +14,8 @@ public class TransacaoTest {
     Fornecedor fornecedor = new Fornecedor();
     Fornecedor forn = new Fornecedor(1, "Natura");
     ;
-    Produto produto = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, forn);
+    Produto produto =
+        new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, forn, new Date());
     Transacao transacao = new Transacao("TIPO TRANSACAO", produto);
 
     assertNotNull(transacao.getProduto());
