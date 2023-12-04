@@ -34,9 +34,19 @@ public class Filial {
             "Sabonete", "Produto de limpeza", codigoDeBarras, 2.0f, 3.0f, 20, forn, new Date());
     return produto;
   }
+  
+  public Estoque getEstoque() {
+	  return this.estoque;
+  }
 
-public Integer tranfereProdutoParaFilial(Filial filial, int i) {
-	// TODO Auto-generated method stub
-	return 10;
+  public void tranfereProdutoParaFilial(Filial filial2, String nomeProdutoTransferido, int qtdTranferida) {
+	  Estoque estoque1 = this.getEstoque();
+	  Estoque estoque2 = filial2.getEstoque();
+	  
+	  Produto p1 = estoque1.consultaEstoquePorNome(nomeProdutoTransferido);
+	  Produto p2 = estoque2.consultaEstoquePorNome(nomeProdutoTransferido);
+	  
+	  p1.diminuiQtdDisponivel(qtdTranferida);
+	  p2.adicionaQtdDisponivel(qtdTranferida);
   }
 }
