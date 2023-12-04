@@ -59,6 +59,14 @@ public class Produto {
   public void setDataValidade(Date dataValidade) {
     this.dataValidade = dataValidade;
   }
+  
+  public void adicionaQtdDisponivel(Integer quantidade) {
+	  this.qtdDisponivel += quantidade;
+  }
+  
+  public void diminuiQtdDisponivel(Integer quantidade) {
+	  this.qtdDisponivel -= quantidade;
+  }
 
   public String getNome() {
     return nome;

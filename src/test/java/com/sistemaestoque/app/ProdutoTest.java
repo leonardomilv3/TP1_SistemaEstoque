@@ -1,50 +1,63 @@
 package com.sistemaestoque.app;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
 import com.sistemaestoque.app.exception.ValorInvalidoException;
-import java.util.Date;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.Date;
+import java.util.stream.Stream;
 
 public class ProdutoTest {
 
-  Produto prod;
-  Fornecedor fornecedor, forn;
+  @ParameterizedTest
+  @MethodSource("produtoProvider")
+  void testCadastrarProdutoValido(
+      String nome,
+      String descricao,
+      String codigoBarras,
+      float precoCusto,
+      float precoVenda,
+      int qtdDisponivel,
+      Fornecedor fornecedor) throws DescricaoEmBrancoException, ValorInvalidoException {
+    Produto produto = new Produto(nome, descricao, codigoBarras, precoCusto, precoVenda, qtdDisponivel, fornecedor,
+        new Date());
 
-  @BeforeEach
-  public void setup() throws DescricaoEmBrancoException, ValorInvalidoException {
-    fornecedor = new Fornecedor();
-    forn = new Fornecedor(1, "Natura");
-    prod = new Produto("Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, forn, new Date());
+    assertEquals(nome, produto.getNome());
+    assertEquals(descricao, produto.getDescricao());
+    assertEquals(codigoBarras, produto.getCodigoBarras());
+    assertEquals(precoCusto, produto.getPrecoCusto());
+    assertEquals(precoVenda, produto.getPrecoVenda());
+    assertEquals(qtdDisponivel, produto.getQtdDisponivel());
+    assertEquals(fornecedor, produto.getFornecedor());
+  }
+
+  static Stream<Object> produtoProvider() {
+    Fornecedor fornecedor = new Fornecedor(1, "Natura");
+
+    return Stream.of(
+        new Object[] { "Sabonete", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor },
+        new Object[] { "Shampoo", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor },
+        new Object[] { "Detergente", "Produto de limpeza", "0000", 2.0f, 3.0f, 20, fornecedor });
   }
 
   @Test
-  public void testCadastrarUmProduto() throws DescricaoEmBrancoException, ValorInvalidoException {
-    assertEquals("Sabonete", prod.getNome());
-    assertEquals("Produto de limpeza", prod.getDescricao());
-    assertEquals("0000", prod.getCodigoBarras());
-    assertEquals(2.0f, prod.getPrecoCusto());
-    assertEquals(3.0f, prod.getPrecoVenda());
-    assertEquals(20, prod.getQtdDisponivel());
-    assertEquals(forn, prod.getFornecedor());
-  }
-
-  @Test
-  public void testCadastrarUmProdutoDescricaoEmBranco()
+  void testCadastrarUmProdutoDescricaoEmBranco()
       throws DescricaoEmBrancoException, ValorInvalidoException {
-    Assertions.assertThrows(
+    assertThrows(
         DescricaoEmBrancoException.class,
-        () -> prod = new Produto(null, null, null, 1f, 1f, 1, forn, new Date()));
+        () -> new Produto(null, null, null, 1f, 1f, 1, new Fornecedor(), new Date()));
   }
 
   @Test
-  public void testCadastrarUmProdutoValorInvalido()
+  void testCadastrarUmProdutoValorInvalido()
       throws DescricaoEmBrancoException, ValorInvalidoException {
-    Assertions.assertThrows(
+    assertThrows(
         ValorInvalidoException.class,
-        () -> prod = new Produto("a", "b", "c", -1f, 1f, 1, forn, new Date()));
+        () -> new Produto("a", "b", "c", -1f, 1f, 1, new Fornecedor(), new Date()));
   }
 }
