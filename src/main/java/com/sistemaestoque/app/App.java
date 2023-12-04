@@ -95,8 +95,17 @@ public class App {
           System.out.print("\033[H\033[2J");
           System.out.flush();
           List<Produto> prodList = estoque.listaProdutosArmazenados();
+          System.out.println("Código de barras | Nome | Qtd. | Preço | Data de validade\n");
+          int cnt = 1;
           for(Produto prod : prodList) {
-            System.out.print(prod.getCodigoBarras() + "\n");
+            System.out.print(cnt + ": ");
+            System.out.print(prod.getCodigoBarras() + " | ");
+            System.out.print(prod.getNome() + " | ");
+            System.out.print(prod.getQtdDisponivel() + " | ");
+            System.out.print(prod.getPrecoVenda() + " | ");
+            System.out.print(prod.getDataValidade().getMonth() + "/" 
+                + prod.getDataValidade().getYear() + "\n");
+            cnt++;
           }
           break;
         case 5:
