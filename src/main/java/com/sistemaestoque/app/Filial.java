@@ -34,4 +34,9 @@ public class Filial {
             "Sabonete", "Produto de limpeza", codigoDeBarras, 2.0f, 3.0f, 20, forn, new Date());
     return produto;
   }
+
+public Integer tranfereProdutoParaFilial(Filial filial, int i) {
+	// TODO Auto-generated method stub
+	return 10;
+  }
 }

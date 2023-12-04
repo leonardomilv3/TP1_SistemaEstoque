@@ -5,7 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.sistemaestoque.app.exception.DescricaoEmBrancoException;
 import com.sistemaestoque.app.exception.ValorInvalidoException;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 public class FilialTest {
@@ -39,4 +43,16 @@ public class FilialTest {
 
     assertEquals("1234", produtoVendido.getCodigoBarras());
   }
+  
+  @Test
+  public void testTranferenciaUmProdutoEntre2Filiais() throws DescricaoEmBrancoException, ValorInvalidoException {
+	  Filial filial1 = new Filial("FILIAL 1");
+	  Filial filial2 = new Filial("FILIAL 2");
+	  
+	  Produto prod1 = filial1.vendeProduto("1234");
+	  Produto prod2 = filial2.vendeProduto("4321");
+	  
+	  assertEquals(10, filial1.tranfereProdutoParaFilial(filial2, 10));
+  }
+  
 }
