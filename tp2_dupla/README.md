@@ -356,18 +356,111 @@ Para resolver esse problema foi feito a seguinte refatoração, visando a portab
 
 ## Característica 5
 
-### <Nome>
+### Modularidade (baixo acoplamento e alta coesão)
 
-- Descrição:
+- Descrição: Modularidade refere-se à capacidade de dividir um sistema em partes independentes e coesas, permitindo baixo acoplamento entre elas. Isso significa que cada módulo ou componente deve realizar uma função específica e interagir com outros de forma mínima e bem definida, facilitando a manutenção, reutilização e escalabilidade do software.
     
 - Efeitos no código:
+    - Facilidade de Manutenção:
+        -  Com módulos bem definidos, as alterações em um componente específico têm menos probabilidade de afetar outros, facilitando a manutenção e reduzindo o risco de introduzir erros em outras partes do código.
+    - Reutilização de Código:
+        - Módulos coesos podem ser facilmente reutilizados em diferentes partes do sistema ou em projetos distintos, economizando tempo de desenvolvimento e evitando a duplicação de código.
+    - Testabilidade Aprimorada:
+        - Módulos isolados e independentes são mais fáceis de testar, pois seu comportamento pode ser verificado de forma mais direta e específica, aumentando a cobertura de testes e a confiança na qualidade do software.
+    - Escalabilidade:
+        - Com uma arquitetura modular, é mais simples escalar o sistema, pois novos recursos ou funcionalidades podem ser adicionados sem grande impacto nos módulos existentes, permitindo o crescimento do software de maneira mais controlada e eficiente.
 
 
 ### Relação com maus-cheiros
+O mau cheiro de código conhecido como "Cadeia de Mensagens" ocorre quando há uma sequência de chamadas de métodos ou acessos a propriedades de objetos, o que pode indicar um baixo nível de modularidade.
 
+Relacionando com Modularidade:
+
+Baixa Coesão: Cadeias de mensagens frequentemente indicam que um objeto está acessando diretamente muitos outros objetos para realizar suas tarefas. Isso sugere uma baixa coesão, pois a responsabilidade de uma parte do código está estendida por múltiplos objetos, o que pode dificultar a manutenção e a compreensão do código.
+
+Alto Acoplamento: Esse mau cheiro geralmente está relacionado a um alto acoplamento entre objetos, já que a mudança em um objeto da cadeia pode exigir ajustes em todos os objetos subsequentes, impactando áreas aparentemente não relacionadas.
+
+Dificuldade de Teste e Refatoração: Cadeias de mensagens dificultam a escrita de testes eficazes, pois é complicado isolar e testar cada parte da cadeia separadamente. Além disso, refatorar código com cadeias de mensagens pode ser desafiador, pois uma pequena alteração em um ponto da cadeia pode ter efeitos colaterais em vários outros lugares.
 
 ### Operação de refatoração
 
+Pode-se notar no código do sistema de estoque, no App.java, que o método de cadastrar produto, assim como todos os outros métodos do switch, poderiam ser refatorados para métodos externos que só fossem chamados no menu, aumentando a modularização e deixando o código mais limpo, vamos ao código como está hoje:
 
+```java
+case 3:
+          System.out.print("\033[H\033[2J");
+          System.out.flush();
+          scanner.nextLine(); // remove '\n'
+                              //
+          System.out.print("CADASTRO DE PRODUTO\n");
+          
+          System.out.print("Nome: ");
+          String nomeProd = scanner.nextLine();
+          System.out.print("Descrição: ");
+          String descricao = scanner.nextLine();
+          System.out.print("Código de barras: ");
+          String codigoBarras = scanner.nextLine();
+          System.out.print("Preço (Custo): ");
+          float precoCusto = scanner.nextFloat();
+          System.out.print("Preço (Venda): ");
+          float precoVenda = scanner.nextFloat();
+          System.out.print("Quantidade: ");
+          int qtdDisponivel = scanner.nextInt();
+          int idFornecedor = 1;
+          System.out.print("Ano do vencimento: ");
+          int dataA = scanner.nextInt();
+          System.out.print("Mês do vencimento: ");
+          int dataM = scanner.nextInt();
+          //scanner.nextLine(); // remove '\n'
 
+          Date dataValidade = new Date();
+          dataValidade.setMonth(dataM);
+          dataValidade.setYear(dataA);
+
+          Produto p = new Produto(nomeProd, descricao, codigoBarras,
+              precoCusto, precoVenda, qtdDisponivel, fornecedoresDb.listarFornecedores().get(0), dataValidade);
+          estoque.armazenaProduto(p);
+          System.out.print("PRODUTO CADASTRADO!\n");
+          break;
+```
+
+É apenas um item do menu, modularizando para uma nova classe CadastraProduto por exemplo, teriamos o seguinte: 
+
+```java
+import java.util.Date;
+
+public class CadastroProduto {
+    private Estoque estoque;
+    private Fornecedores fornecedoresDb;
+
+    public CadastroProduto(Estoque estoque, Fornecedores fornecedoresDb) {
+        this.estoque = estoque;
+        this.fornecedoresDb = fornecedoresDb;
+    }
+
+    public void cadastrarNovoProduto(Scanner scanner) {
+        System.out.print("CADASTRO DE PRODUTO\n");
+
+ 
+        Produto p = criarProdutoComInformacoesColetadas();
+        estoque.armazenaProduto(p);
+        System.out.print("PRODUTO CADASTRADO!\n");
+    }
+
+    private Produto criarProdutoComInformacoesColetadas() {
+         return new Produto(/* informações do produto */);
+    }
+}
+```
+E o código main teria apenas esse trecho
+
+```java
+ case 3:
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+            cadastroProduto.cadastrarNovoProduto(scanner);
+            break;
+
+```
+tornando a leitura mais fácil e o código ficaria mais dividido.
 
