@@ -9,3 +9,78 @@ O TP2 consiste em realizar uma análise sobre o código, com base em boas caract
 | André Macedo Rodrigues Alves | 190102390 |
 | Thiago Siqueira Gomes | 190055294|
 
+
+## Modularidade
+
+### Algumas características de um código modularizado
+- **Divisão em Módulos:** O código é dividido em módulos independentes, cada um responsável por uma função ou conjunto de funcionalidades específicas.
+
+- **Encapsulamento:** Cada módulo encapsula sua própria lógica e funcionalidade, ocultando detalhes internos e expondo apenas uma interface clara para interações externas.
+
+- **Baixo Acoplamento:** Os módulos têm baixo acoplamento entre si, ou seja, mudanças em um módulo não afetam diretamente outros módulos. Isso aumenta a flexibilidade do código.
+
+- **Alta Coesão:** Cada módulo é altamente coeso, o que significa que as funcionalidades relacionadas estão agrupadas no mesmo módulo. Isso facilita a manutenção e compreensão do código.
+
+- **Reusabilidade:** Os módulos são projetados para serem reutilizáveis em diferentes partes do sistema ou até mesmo em outros projetos. Isso economiza tempo e esforço ao evitar a necessidade de reescrever código semelhante.
+
+### Code smell
+
+Um code smell que indica um códgo mal modularizado é um método muito extenso.
+No tp1 podemos encontrar um método que exemplifica esse code smell:
+
+https://github.com/leonardomilv3/TP1_SistemaEstoque/blob/24efd607adb35cae9702b7543f29d8bb16e54dec/src/main/java/com/sistemaestoque/app/App.java#L18-L190
+
+### Correção
+
+Para corrigir o code smell acima, basta dividir cada uma das ações no switch case em novos métodos,
+assim em cada um dos cases basta chamar o método responsável pela ação.
+
+```java
+public static void main(String[] args)
+      throws ValorInvalidoException, DescricaoEmBrancoException, DuplicadoException {
+    Scanner scanner = new Scanner(System.in);
+    categorias = new Categorias();
+    fornecedoresDb = new Fornecedores();
+    estoque = new Estoque();
+    historico = new ArrayList();
+
+    // cadastra fornecedor padrao
+    Fornecedor df = new Fornecedor(1, "default");
+    fornecedoresDb.cadastraFornecedor(df);
+
+    while (true) {
+      App.menu();
+      int option = scanner.nextInt();
+
+      switch (option) {
+        case 1:
+          App.cadastraCategoria();
+          break;
+        case 2:
+          App.cadastraFornecedor();
+          break;
+        case 3:
+          App.cadastraProduto();
+          break;
+        case 4:
+          App.cadastraListaEstoque();
+          break;
+        case 5:
+          App.cadastraListaCategorias();
+          break;
+        case 6:
+          App.compraProduto();
+          break;
+        case 7:
+          App.histDeTransacoes();
+          break;
+        case 8:
+          System.exit(1);
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+```
