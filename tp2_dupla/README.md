@@ -7,3 +7,5 @@ O TP2 consiste em realizar uma análise sobre o código, com base em boas caract
 | Discente | Matrícula |
 |--------- | --------- |
 | André Macedo Rodrigues Alves | 190102390 |
+| Thiago Siqueira Gomes | 190055294|
+
