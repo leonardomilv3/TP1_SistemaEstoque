@@ -8,6 +8,7 @@ O TP2 consiste em realizar uma análise sobre o código, com base em boas caract
 |--------- | --------- |
 | Leonardo Milomes Vitoriano | 201000379 |
 | Cícero Barrozo Fernandes Filho | 190085819 |
+| Christian Fleury Alencar Siqueira | 190011602 |
 
 ## Característica 1
 
