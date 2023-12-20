@@ -352,7 +352,8 @@ Para resolver esse problema foi feito a seguinte refatoração, visando a portab
     }
   }
 
-``
+```
+
 ## Característica 5
 
 ### <Nome>
