@@ -290,20 +290,69 @@ Dessa forma, é possível alcançar a Característica 3, pois o método alertaPr
 
 ## Característica 4
 
-### <Nome>
+### Portabilidade
 
-- Descrição:
+- Descrição: A portabilidade significa que o código é preparado para rodar em diferentes ambientes.
     
 - Efeitos no código:
-
+    - Abstração de Plataforma:
+        - Introdução de abstrações para manipulação de operações específicas da plataforma.
+    - Padrões de Codificação Universais:
+        - Adaptação do código para seguir convenções amplamente aceitas.
+    - Detecção Dinâmica de Recursos:
+        - Introdução de lógica condicional para detectar características da plataforma em tempo de execução.
 
 ### Relação com maus-cheiros
 
-
+A falta de portabilidade pode gerar maus-cheiros de código como duplicação de código para atender plataformas diferentes, lógicas dependentes de sistema operacional, resultando em condicionais excessivas.
 
 ### Operação de refatoração
+Considere o seguinte código Typescript, onde é feito um envio de email, e são utilizados templates, que estão no path "../emails/templates", no primeiro código, o path está sendo passado exatamente dessa forma, porém, esse código não é portável, pois nem todos sistemas operacionais entenderiam esse path, no Windows, por exemplo, seria "..\emails\templates".
+```typescript
+ private async renderEmail<T extends Record<string, any>>(
+    input: IInputRenderEmail<T>
+  ): Promise<Either<IError, string>> {
+    try {
+      const edge = new Edge({ cache: false })
 
+      const templatesPath = '../emails/templates'
 
+      edge.mount('templates', templatesPath)
+
+      const htmlRendering = await edge.render(`templates::${input.template}`, input.payload)
+
+      return right(htmlRendering)
+    } catch (err) {
+      console.log(err)
+      return left(GeneralEmailServiceError)
+    }
+  }
+```
+Para resolver esse problema foi feito a seguinte refatoração, visando a portabilidade do código, onde utilizamos o módulo do javascript "path", e conseguimos construir o path em tempo de execução, de acordo com o sistema operacional em que o código está rodando. Esse código é portavel, rodando em diferentes sistemas operacionais corretamente.
+
+```typescript
+  import path from 'path'
+
+  private async renderEmail<T extends Record<string, any>>(
+    input: IInputRenderEmail<T>
+  ): Promise<Either<IError, string>> {
+    try {
+      const edge = new Edge({ cache: false })
+
+      const templatesPath = path.resolve(__dirname, '..', 'emails', 'templates')
+
+      edge.mount('templates', templatesPath)
+
+      const htmlRendering = await edge.render(`templates::${input.template}`, input.payload)
+
+      return right(htmlRendering)
+    } catch (err) {
+      console.log(err)
+      return left(GeneralEmailServiceError)
+    }
+  }
+
+``
 ## Característica 5
 
 ### <Nome>
