@@ -80,3 +80,171 @@ private static void limpaTela() {
 ```
 
 
+## Característica 2
+
+### Elegância
+
+- Descrição: refere-se à qualidade estética, simplicidade e eficiência de sua implementação. Um código elegante é aquele que atinge seus objetivos de maneira concisa, fácil de entender e que utiliza abstrações apropriadas.
+    
+- Efeitos no código:
+    - **Estrutura Clara e Simples**:
+        A elegância promove uma estrutura clara e simples. O código é organizado de maneira lógica, com divisões adequadas em funções, classes ou módulos. Isso facilita a navegação e compreensão.
+    - **Claridade na Expressão**:
+        Um código elegante expressa suas intenções de maneira clara. O uso de nomes significativos para variáveis, métodos e classes contribui para uma compreensão rápida do propósito de cada elemento.
+    - **Coesão Adequada**:
+        A elegância favorece a coesão, onde partes relacionadas do código estão agrupadas de forma lógica. Classes e métodos têm responsabilidades bem definidas, o que melhora a manutenção e compreensão do sistema.
+    - **Baixo Acoplamento**:
+        Um código elegante geralmente possui baixo acoplamento entre seus componentes. Isso significa que as diferentes partes do código são independentes umas das outras, facilitando modificações e reduzindo os impactos colaterais.
+
+### Relação com maus-cheiros
+
+
+- **Boa Prática**: Elegância
+    - Efeitos Positivos no Código:
+        - Estrutura clara e simples.
+        - Clareza na expressão das intenções.
+        - Coesão adequada entre partes do código.
+        - Baixo acoplamento entre componentes.
+        - Eficiência e simplicidade na execução de tarefas.
+        - Uso adequado de abstrações.
+
+- **Mau Cheiro**: Instruções Switch
+    - Descrição:
+        Refere-se ao uso excessivo de instruções switch ou case em um código, especialmente quando essa estrutura cresce e se torna difícil de manter.
+    - Efeitos Negativos no Código:
+        - Complexidade aumentada com o crescimento do número de casos.
+        - Dificuldade em manter e entender a lógica do código.
+        - Potencial para introduzir erros durante modificações.
+        - Baixa extensibilidade e flexibilidade.
+
+
+Instruções switch frequentemente resultam em códigos extensos, difíceis de manter e entender, especialmente quando há muitos casos. Essa abordagem não é elegante, pois não favorece a simplicidade e clareza.
+
+Uma prática mais elegante seria substituir instruções switch por abordagens mais polimórficas, como o uso de interfaces, classes abstratas ou padrões de design que favoreçam o polimorfismo. Isso não apenas reduz a complexidade, mas também torna o código mais extensível e fácil de manter.
+
+### Operação de refatoração
+
+Na classe App.java, aonde está toda a lógica de integração do sistema, existe uma instrução switch com mais de 6 *cases*, e cada *case* possui várias linhas de código, tornando difícil o compreendimento.
+
+Sendo assim, a operação de refatoração aplicável seria:
+- Extrair método / Mover método: para extrair todo o comando switch e movê-lo para onde o polimorfismo é necessário. 
+
+Utilizando uma Hierarquia de Classes e Polimorfismo, é possível aplicar esses 3 passos a seguir para tornar o switch-case da classe App.java elegante, em pseudocódigo:
+
+1. Criar uma interface para representar as opções do menu:
+
+```java
+public interface OpcaoMenu {
+    void executar(Scanner scanner);
+}
+```
+
+2. Implementar classes para cada opção do menu:
+
+```java
+public class CadastroCategoria implements OpcaoMenu {
+    @Override
+    public void executar(Scanner scanner) {
+        // ...
+    }
+}
+
+public class CadastroFornecedor implements OpcaoMenu {
+    @Override
+    public void executar(Scanner scanner) {
+        // ...
+    }
+}
+
+// ... Implementar classes para as demais opções do menu
+
+```
+
+3. Modificar a classe App para usar polimorfismo:
+
+```java
+public class App {
+    // ... código
+
+    public static void main(String[] args)
+            throws ValorInvalidoException, DescricaoEmBrancoException, DuplicadoException {
+        Scanner scanner = new Scanner(System.in);
+        // ... Restante do código
+
+        while (true) {
+            menu();
+            int option = scanner.nextInt();
+
+            OpcaoMenu opcaoMenu = obterOpcaoMenu(option);
+            opcaoMenu.executar(scanner);
+        }
+    }
+
+    private static OpcaoMenu obterOpcaoMenu(int option) {
+        switch (option) {
+            case 1:
+                return new CadastroCategoria();
+            case 2:
+                return new CadastroFornecedor();
+            // ... Adicionar casos para as demais opções do menu
+        }
+    }
+
+    // ... 
+}
+
+
+```
+
+Então, depois de aplicar a operação de refatoramento, a classe App estaria mais elegante com a instrução switch-case devidamente refatorada, mais legivel e de fácil entendimento.
+
+## Característica 3
+
+### Idiomático
+
+- Descrição: 
+    
+- Efeitos no código:
+
+
+### Relação com maus-cheiros
+
+
+
+### Operação de refatoração
+
+
+
+## Característica 4
+
+### <Nome>
+
+- Descrição:
+    
+- Efeitos no código:
+
+
+### Relação com maus-cheiros
+
+
+
+### Operação de refatoração
+
+
+## Característica 5
+
+### <Nome>
+
+- Descrição:
+    
+- Efeitos no código:
+
+
+### Relação com maus-cheiros
+
+
+### Operação de refatoração
+
+
+
+
