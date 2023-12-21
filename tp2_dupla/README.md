@@ -84,3 +84,83 @@ public static void main(String[] args)
   }
 
 ```
+
+## Ausência de duplicidades
+### Algumas características de um código com ausência de duplicidade
+- **Unicidade de Elementos:**  Cada componente, símbolo ou unidade no código é único. Não há repetição de elementos, garantindo uma singularidade para cada item no código.
+
+- **Identificação Individual:** Cada elemento é distintamente identificável pelo seu valor único no código. Isso facilita a referência e o reconhecimento de cada parte do código de forma única.
+
+- **Redução de Ambiguidade:** A ausência de duplicidade elimina ambiguidades que podem surgir quando elementos idênticos ou semelhantes estão presentes em um código. Isso torna a interpretação e o processamento do código mais claros e diretos.
+
+- **Maior Eficiência na Organização:** Em muitos casos, códigos sem duplicidade podem simplificar processos de organização e armazenamento, pois não há necessidade de lidar com a redundância de elementos.
+
+### Code smell
+
+Quando partes idênticas ou semelhantes de código são encontradas em diferentes lugares, isso sugere falta de reutilização e pode levar à duplicação de elementos.
+
+Um code smell que indica um código duplicado:
+No tp1 podemos encontrar um método que exemplifica esse code smell:
+
+```java
+class Retangulo {
+    double ladoA;
+    double ladoB;
+    
+    double calcularArea() {
+        return ladoA * ladoB;
+    }
+    
+    double calcularPerimetro() {
+        return 2 * (ladoA + ladoB);
+    }
+}
+
+class Circulo {
+    double raio;
+    
+    double calcularArea() {
+        return Math.PI * raio * raio;
+    }
+    
+    double calcularPerimetro() {
+        return 2 * Math.PI * raio;
+    }
+}
+```
+
+### Correção
+
+Para resolver a duplicação no cálculo do perímetro, podemos criar uma classe abstrata Forma que contenha esse método e estender essa classe nas classes Retângulo e Círculo.
+
+```java
+abstract class Forma {
+    abstract double calcularArea();
+    abstract double calcularPerimetro();
+}
+
+class Retangulo extends Forma {
+    double ladoA;
+    double ladoB;
+    
+    double calcularArea() {
+        return ladoA * ladoB;
+    }
+    
+    double calcularPerimetro() {
+        return 2 * (ladoA + ladoB);
+    }
+}
+
+class Circulo extends Forma {
+    double raio;
+    
+    double calcularArea() {
+        return Math.PI * raio * raio;
+    }
+    
+    double calcularPerimetro() {
+        return 2 * Math.PI * raio;
+    }
+}
+```
