@@ -44,7 +44,6 @@ public static void main(String[] args)
     estoque = new Estoque();
     historico = new ArrayList();
 
-    // cadastra fornecedor padrao
     Fornecedor df = new Fornecedor(1, "default");
     fornecedoresDb.cadastraFornecedor(df);
 
@@ -179,10 +178,9 @@ class Circulo extends Forma {
 
 ### Code smell
 
-Quando partes idênticas ou semelhantes de código são encontradas em diferentes lugares, isso sugere falta de reutilização e pode levar à duplicação de elementos.
+A ausência de portabilidade no código pode ser associada a um problema conhecido como "Dependência do Ambiente". Isso ocorre quando o código está intimamente ligado a um ambiente específico, como um sistema operacional, uma plataforma ou um contexto de execução.
 
-Um code smell que indica um código duplicado:
-No tp1 podemos encontrar um método que exemplifica esse code smell:
+A ausencia de portabilidae pode ser verificada no seguinte codigo:
 
 ```java
 public class ExemploPortabilidade {
@@ -242,6 +240,67 @@ class SistemaOperacionalFactory {
         } else {
             return new OutroSistema();
         }
+    }
+}
+```
+
+## Elegância
+### Algumas características de um código com elegancia
+
+- **Facilidade de Leitura e Compreensão:**  Um código elegante é mais legível, tornando mais fácil para outros desenvolvedores entenderem o que está acontecendo. Isso é essencial para a manutenção e colaboração em projetos de equipe.
+
+- **Facilidade de Manutenção:** Quando o código é claro e organizado, realizar correções, adições ou atualizações se torna mais simples. Menos tempo é gasto decifrando o código existente, o que reduz a chance de introduzir novos bugs ao fazer alterações.
+
+- **Padrões de Boas Práticas:** Escrever código de forma elegante muitas vezes segue as melhores práticas de programação. Isso promove a consistência no estilo de codificação e ajuda a garantir a conformidade com padrões aceitos pela comunidade de desenvolvimento.
+
+- **Facilita a Depuração:** Quando algo dá errado, um código elegante é mais fácil de depurar. A clareza na estrutura do código pode ajudar a identificar e corrigir problemas mais rapidamente.
+
+### Code smell
+
+Alguns code smells relacionados a falta de elegancia, são: Funções/Métodos Longos  Classes ou Métodos com Muitas Responsabilidades Nomenclatura Ruim.
+Um exemplo de código com esses code smells:
+
+```java
+public class ProcessData {
+    public void processDataAndPrintResult(int[] data) {
+        int sum = 0;
+        int count = 0;
+        for (int i = 0; i < data.length; i++) {
+            if (data[i] > 0) {
+                sum += data[i];
+                count++;
+            }
+        }
+        double average = (double) sum / count;
+        System.out.println("Average of positive numbers: " + average);
+    }
+}
+```
+### Correção
+Nesta versão refatorada, o código foi dividido em métodos menores e mais específicos. A classe DataProcessor agora tem um método para calcular a média dos números positivos e outro para imprimir o resultado. A nomenclatura também foi melhorada para refletir as responsabilidades de cada método. Isso torna o código mais legível, modular e seguindo boas práticas de nomenclatura e estruturação.
+
+```java
+public class DataProcessor {
+    public double calculateAverageOfPositiveNumbers(int[] data) {
+        int sum = 0;
+        int count = 0;
+
+        for (int i = 0; i < data.length; i++) {
+            if (data[i] > 0) {
+                sum += data[i];
+                count++;
+            }
+        }
+
+        if (count == 0) {
+            return 0; /
+        }
+
+        return (double) sum / count;
+    }
+
+    public void printResult(double average) {
+        System.out.println("Average of positive numbers: " + average);
     }
 }
 ```
