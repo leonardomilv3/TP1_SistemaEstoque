@@ -329,14 +329,15 @@ Eliminar duplicação de código sempre que possível. O uso de funções, méto
 Um dos code smells que identifica esse code smell é uma trecho de código com muitas responsabilidades
 que poderiam ser modularizadas para tornar o código mais simples.
 
-https://github.com/leonardomilv3/TP1_SistemaEstoque/blob/24efd607adb35cae9702b7543f29d8bb16e54dec/src/main/java/com/sistemaestoque/app/App.java#L63C1-L114
+https://github.com/leonardomilv3/TP1_SistemaEstoque/blob/24efd607adb35cae9702b7543f29d8bb16e54dec/src/main/java/com/sistemaestoque/app/App.java#L63-L114
 
-No exemplo acima o trecho de listar os fornecedores poderia virar um novo método.
+No exemplo acima o trecho de listar os fornecedores poderia virar um novo método e o trecho de limpar
+a tela também.
 
 ### Correção
 
 ```java
-public void listarFornecedores() {
+private static void listarFornecedores() {
       ArrayList<Fornecedor> fList1 = fornecedoresDb.listarFornecedores();
       for (int i = 0; i < fList1.size(); i++) {
       Fornecedor f1 = fList1.get(i);
@@ -345,6 +346,12 @@ public void listarFornecedores() {
       if (i != fList1.size() - 1) System.out.print(", ");
       }
       System.out.print("\n");
+}
+
+private static void limparConsole() {
+    System.out.print("\033[H\033[2J");
+    System.out.flush();
+    scanner.nextLine(); // remove '\n'
 }
 ```
 
