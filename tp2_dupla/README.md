@@ -164,3 +164,84 @@ class Circulo extends Forma {
     }
 }
 ```
+
+
+## Portabilidade
+### Algumas características de um código com boa portabilidade
+
+- **Compatibilidade entre plataformas:** Ao seguir padrões e práticas de codificação que são independentes de plataforma, o código pode ser executado em diferentes sistemas operacionais ou ambientes sem a necessidade de grandes modificações. Isso aumenta a flexibilidade do software e amplia seu alcance.
+
+- **Manutenção simplificada:** Código portátil tende a ser mais fácil de manter. Quando atualizações ou correções são necessárias, não há a necessidade de reescrever partes inteiras do código para torná-lo compatível com diferentes sistemas. Isso economiza tempo e recursos.
+
+- **Reutilização de código:** A portabilidade muitas vezes está ligada à modularidade e à reutilização de componentes. Códigos independentes de plataforma podem ser reutilizados em diferentes projetos ou em diferentes partes do mesmo projeto, reduzindo a redundância e aumentando a eficiência no desenvolvimento.
+
+- **Acesso a diferentes mercados:** Com a portabilidade, um software pode ser facilmente adaptado para atender a diferentes demandas de mercado. Isso é crucial em um mundo onde diferentes dispositivos e sistemas operacionais coexistem e têm seu próprio público-alvo.
+
+### Code smell
+
+Quando partes idênticas ou semelhantes de código são encontradas em diferentes lugares, isso sugere falta de reutilização e pode levar à duplicação de elementos.
+
+Um code smell que indica um código duplicado:
+No tp1 podemos encontrar um método que exemplifica esse code smell:
+
+```java
+public class ExemploPortabilidade {
+    public static void main(String[] args) {
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            executarWindows();
+        } else {
+            executarOutroSistema();
+        }
+    }
+    
+    public static void executarWindows() {
+        System.out.println("Executando no Windows");
+    }
+    
+    public static void executarOutroSistema() {
+        System.out.println("Executando em outro sistema");
+    }
+}
+```
+
+### Correção
+
+Neste exemplo, o código original tinha lógica específica para determinar o sistema operacional e executar diferentes métodos com base nisso. Na refatoração, foi introduzida uma interface SistemaOperacional que define um método executar(). Em seguida, foram criadas classes concretas Windows e OutroSistema que implementam essa interface e contêm a lógica específica para cada sistema operacional.
+
+```java
+public class ExemploPortabilidade {
+    public static void main(String[] args) {
+        SistemaOperacional sistema = SistemaOperacionalFactory.getSistemaOperacional();
+        sistema.executar();
+    }
+}
+
+interface SistemaOperacional {
+    void executar();
+}
+
+class Windows implements SistemaOperacional {
+    @Override
+    public void executar() {
+        System.out.println("Executando no Windows");
+    }
+}
+
+class OutroSistema implements SistemaOperacional {
+    @Override
+    public void executar() {
+        System.out.println("Executando em outro sistema");
+    }
+}
+
+class SistemaOperacionalFactory {
+    public static SistemaOperacional getSistemaOperacional() {
+        String os = System.getProperty("os.name");
+        if (os.startsWith("Windows")) {
+            return new Windows();
+        } else {
+            return new OutroSistema();
+        }
+    }
+}
+```
