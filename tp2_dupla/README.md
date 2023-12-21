@@ -304,3 +304,48 @@ public class DataProcessor {
     }
 }
 ```
+
+## Simplicidade
+
+### Algumas caracteísticas de simplicidade no contexto de software
+
+- Clareza:
+Códigos simples são claros e fáceis de entender. Variáveis, funções e estruturas de controle têm nomes significativos, facilitando a compreensão do propósito de cada parte do código.
+
+- Conciseness (Concisão):
+Evitar excesso de código desnecessário. Escrever a lógica de maneira concisa, sem redundâncias ou elaborações excessivas.
+
+- Foco em uma Única Responsabilidade:
+Cada função ou classe deve ter uma única responsabilidade clara. Isso facilita a manutenção e a compreensão do código.
+
+- Estruturas de Controle Simples:
+Evitar aninhamento excessivo e estruturas de controle complexas. O código deve seguir um fluxo lógico fácil de seguir.
+
+- Evitar Código Redundante:
+Eliminar duplicação de código sempre que possível. O uso de funções, métodos e abstrações apropriadas ajuda a evitar redundâncias.
+
+### Code smell
+
+Um dos code smells que identifica esse code smell é uma trecho de código com muitas responsabilidades
+que poderiam ser modularizadas para tornar o código mais simples.
+
+https://github.com/leonardomilv3/TP1_SistemaEstoque/blob/24efd607adb35cae9702b7543f29d8bb16e54dec/src/main/java/com/sistemaestoque/app/App.java#L63C1-L114
+
+No exemplo acima o trecho de listar os fornecedores poderia virar um novo método.
+
+### Correção
+
+```java
+public void listarFornecedores() {
+      ArrayList<Fornecedor> fList1 = fornecedoresDb.listarFornecedores();
+      for (int i = 0; i < fList1.size(); i++) {
+      Fornecedor f1 = fList1.get(i);
+      System.out.print(i + ": ");
+      System.out.print(f1.getNomeFantasia());
+      if (i != fList1.size() - 1) System.out.print(", ");
+      }
+      System.out.print("\n");
+}
+```
+
+Basta utilizar este código no trecho acima ou em outros locais do código.
